@@ -48,9 +48,16 @@
 
 	<!--6.AOP切面配置when-->
 	<aop:config>
-		<aop:pointcut expression="execution(* com.guangxunet.shop.*.service.*.*(..))" id="pointCut"/>
+		<aop:pointcut expression="execution(* com.guangxunet.shop.*.service.*.*(..))" id="pointCut"/><!--where配置在什么地方会被拦截-->
 		<aop:advisor advice-ref="advice" pointcut-ref="pointCut"/>
+		<aop:aspect id="b" ref="testLog">
+			<aop:after pointcut-ref="pointCut" method="writeLog"/>
+		</aop:aspect><!--调用日志类-->  
 	</aop:config>
+	
+	 <!--将日志类注入到bean中。-->
+	<bean id="testLog" class="com.guangxunet.shop.business.util.LogUtil"></bean>
+	 
 	<!--添加扫描mapper的类-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
 		<property name="basePackage" value="com.guangxunet.shop.*.mapper"/>

@@ -1,15 +1,15 @@
 package com.guangxunet.shop.web;
 
-import static org.junit.Assert.*;
-
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.service.ILogininfoService;
+import com.guangxunet.shop.base.util.LoggerUtil;
 
 /** 
 * @author 作者 E-mail: King
@@ -36,5 +36,16 @@ public class LoginTest {
 	public void testLogin() throws Exception {
 		/*Logininfo login = iLogininfoService.login("admin", "admin", "121.121.121", Logininfo.USER_NORMAL);
 		System.out.println(login);*/
+	}
+	
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testLogger() throws Exception {
+		LoggerUtil.info("===========测试参数==============");
+		LoggerUtil.warn("===========测试参数warn==============");
+		LoggerUtil.getCodeLocation();
 	}
 }

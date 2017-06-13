@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.guangxunet.shop.base.domain.Banner;
+import com.guangxunet.shop.base.util.LoggerUtil;
 
 /** 
 * @author 作者 E-mail: King
@@ -29,5 +30,10 @@ public class BannerTest {
 		for (Banner banner : selectAll) {
 			System.out.println(banner);
 		}
+	}
+	
+	@Test
+	public void testLogger() throws Exception {
+		LoggerUtil.info("===========测试参数==============");
 	}
 }

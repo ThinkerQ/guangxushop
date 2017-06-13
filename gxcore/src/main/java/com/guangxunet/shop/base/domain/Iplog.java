@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Iplog {
+public class Iplog extends BaseDomain {
 	public static final int STATE_SUCCESS = 1;//登录成功
     public static final int STATE_FAILED = 0;//登录失败
     

@@ -1,5 +1,6 @@
 package com.guangxunet.shop.base.util;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.context.request.RequestContextHolder;
@@ -36,4 +37,11 @@ public class UserContext {
 	public static void putVerifyCode(VerifyCodeVO codeVO){
         getSession().setAttribute(VERIFYCODE_IN_SESSION,codeVO);
     }
+	
+	public static HttpServletRequest get(){
+        return local.get();
+    }
+	
+	//定义一个方法，将线程中的request保存到线程中，有了request就可以获取session.
+    public static ThreadLocal<HttpServletRequest> local = new ThreadLocal<>();
 }
