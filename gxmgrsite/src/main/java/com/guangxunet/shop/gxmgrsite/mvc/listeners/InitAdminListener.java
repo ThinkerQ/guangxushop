@@ -1,4 +1,4 @@
-package com.guangxunet.shop.gxmgrsite.listeners;
+package com.guangxunet.shop.gxmgrsite.mvc.listeners;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
