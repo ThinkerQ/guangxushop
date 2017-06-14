@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.service.ILogininfoService;
 import com.guangxunet.shop.base.util.LoggerUtil;
 
@@ -28,14 +29,14 @@ public class LoginTest {
 	 */
 	@Test
 	public void testRegister() throws Exception {
-		/*iLogininfoService.register("18211674997", "1234");
-		System.out.println("===注册成功success===");*/
+		iLogininfoService.register("18211674998", "1234");
+		System.out.println("===注册成功success===");
 	}
 	
 	@Test
 	public void testLogin() throws Exception {
-		/*Logininfo login = iLogininfoService.login("admin", "admin", "121.121.121", Logininfo.USER_NORMAL);
-		System.out.println(login);*/
+		Logininfo login = iLogininfoService.login("18211674998", "1234", "121.121.121", Logininfo.USER_NORMAL);
+		System.out.println(login);
 	}
 	
 	/**

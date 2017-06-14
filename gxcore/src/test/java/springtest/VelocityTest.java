@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.guangxunet.shop.base.service.ILogininfoService;
+import com.guangxunet.shop.base.util.LoggerUtil;
 
 /**
  * Created by King on 2017/06/06.
@@ -33,8 +34,15 @@ public class VelocityTest {
      */
     @Test
     public void testXxx() throws Exception {
-        String admin = ConfigTools.encrypt("admin");
-        System.out.println(admin);
+        try {
+			String admin = ConfigTools.encrypt("admin");
+			System.out.println(admin);
+			System.out.println(1 / 0);
+			LoggerUtil.info("=============sssss");
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggerUtil.info("=============出错"+e.getMessage());
+		}
     }
     
     @Test

@@ -58,15 +58,18 @@ public class LogininfoServiceImpl implements ILogininfoService{
         return (logininfoMapper.countUserByName(username)>0);
     }
 
+    /**
+     * 根据手机号和密码登录
+     */
     @Override
-    public Logininfo login(String username, String password,String ip,int usertype) {
+    public Logininfo login(String mobile, String password,String ip,int usertype) {
         //登录操作时创建登陆日志对象
         Iplog iplog = new Iplog();
-        iplog.setUserName(username);
+        iplog.setUserName(mobile);
         iplog.setIp(ip);//ip由Controller控制器中传入，在HttpServletRequest中
         iplog.setLoginTime(new Date());
         iplog.setUserType(usertype);
-        Logininfo logininfo = logininfoMapper.login(username, MD5.encode(password),usertype);//
+        Logininfo logininfo = logininfoMapper.login(mobile, MD5.encode(password),usertype);//
         
         if(logininfo!=null){
             UserContext.putCurrent(logininfo);//将登录者信息保存到session中

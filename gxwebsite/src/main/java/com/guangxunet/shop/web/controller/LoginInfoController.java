@@ -1,5 +1,8 @@
 package com.guangxunet.shop.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,6 +15,7 @@ import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.service.ILogininfoService;
 import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.JsonResult;
+import com.guangxunet.shop.base.util.UserContext;
 
 /** 
 * @author 作者 E-mail: King
@@ -25,13 +29,20 @@ public class LoginInfoController {
 	@Autowired
 	private IVerifyCodeService iVerifyCodeService;
 	
+	/**
+	 * 客户端用户登录
+	 * @param username
+	 * @param password
+	 * @param request
+	 * @return 登录成功则返回登录者信息
+	 */
 	@RequestMapping("/login")
 	@ResponseBody
-	public JsonResult login(String username, String password, HttpServletRequest request){
+	public JsonResult login(String mobile, String password, HttpServletRequest request){
 		JsonResult result = null;
 		
 		//非空检验
-		if (StringUtils.isEmpty(username)) {
+		if (StringUtils.isEmpty(mobile)) {
 			throw new RuntimeException("用户名为空！");
 		}
 		
@@ -40,12 +51,19 @@ public class LoginInfoController {
 		}
 		
 		//登录校验
-		Logininfo login = iLogininfoService.login(username, password, request.getRemoteAddr(), Logininfo.USER_NORMAL);
+		Logininfo login = iLogininfoService.login(mobile, password, request.getRemoteAddr(), Logininfo.USER_NORMAL);
 		
 		if (login == null) {
 			result = new JsonResult("用户名或密码错误，请重试！");
 		}else{
+			Logininfo current = UserContext.getCurrent();
+			Map<String,Object> userInfo = new HashMap<String,Object>();
+			userInfo.put("UId", current.getId());
+			userInfo.put("userName", current.getUsername());
+			userInfo.put("mobile", current.getMobile());
+			userInfo.put("userType", current.getUserType());
 			result = new JsonResult(true,"登录成功！");
+			result.setResult(userInfo);
 		}
 		return result;
 	}

@@ -20,7 +20,7 @@ public interface LogininfoMapper {
     
     int countUserByMobile(String mobile);
 
-    Logininfo login(@Param("username") String username, @Param("password") String password,@Param("usertype")int usertype);
+    Logininfo login(@Param("mobile") String mobile, @Param("password") String password,@Param("usertype")int usertype);
 
     int countByUserType(int userManager);
 

@@ -40,7 +40,7 @@ public class BannerController {
 			LoggerUtil.info("==================获取banner列表=====结果===" + bannerList);
 			if (bannerList != null && bannerList.size() > 0) {//集合非空
 				result = new JsonResult(true, "获取成功！");
-				result.setObject(bannerList);
+				result.setResult(bannerList);
 			} else {
 				result = new JsonResult("获取列表失败！");
 			}

@@ -42,7 +42,7 @@
   <select id="login" resultMap="BaseResultMap">
     select id, state, username, password,usertype,mobile,email
     from logininfo
-    WHERE username = #{username} AND password = #{password} AND usertype = #{usertype}
+    WHERE mobile = #{mobile} AND password = #{password} AND usertype = #{usertype}
   </select>
 
   <select id="countByUserType" resultType="int">
