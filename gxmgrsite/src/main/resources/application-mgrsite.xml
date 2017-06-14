@@ -30,13 +30,13 @@
 		</property>
 	</bean>
 	<!--登录控制拦截器-->
-	<!-- <mvc:interceptors>
+ <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*"/>
-			<mvc:exclude-mapping path="/login.do"/>
-			<bean class="com.guangxunet.shop.gxmgrsite.web.introceptor.LoginCheckInterceptor"/>
+			<mvc:exclude-mapping path="/supervisor/login.do"/>
+			<bean class="com.guangxunet.shop.gxmgrsite.mvc.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 
 	<!--freemarker视图解析器-->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">

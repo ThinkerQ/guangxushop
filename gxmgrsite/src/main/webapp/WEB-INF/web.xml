@@ -5,6 +5,9 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login.html</welcome-file>
+    <welcome-file>login.htm</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
@@ -24,6 +27,19 @@
     <servlet-name>springMVC</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <!-- 配置字符编码过滤器 -->
+  <filter>
+    <filter-name>characterEncoding</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncoding</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
   
   <!--访问图片过滤器-->
   <!-- <filter>
@@ -34,4 +50,8 @@
     <filter-name>syncImgFilter</filter-name>
     <url-pattern>/upload/*</url-pattern>
   </filter-mapping> -->
+  <!-- 用于管理请求相关内容的监听器,只有配置了这个监听器才能使用RequestContextHolder -->
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
 </web-app>
