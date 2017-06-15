@@ -33,4 +33,11 @@ public interface ILogininfoService {
      * 初始化管理员
      */
     void initAdmin();
+
+    /**
+     * 根据手机号检查用户是否存在
+     * @param mobile
+     * @return
+     */
+    boolean checkUserPhoneNumberExist(String mobile);
 }

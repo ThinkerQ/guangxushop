@@ -1,4 +1,7 @@
 package com.guangxunet.shop.web.controller;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guangxunet.shop.base.service.ILogininfoService;
 import com.guangxunet.shop.base.util.JsonResult;
+import com.guangxunet.shop.base.util.PhoneFormatCheckUtils;
 
 import shaded.org.apache.commons.lang3.StringUtils;
 
@@ -34,6 +38,9 @@ public class RegisterController {
         	
             logininfoService.register(mobile, password);
             result = new JsonResult(true,"注册成功！");
+            Map<String,Object> resultmap  = new HashMap<String,Object>();
+            resultmap.put("mobile", mobile);
+            result.setResult(resultmap);
         } catch (Exception e) {
             result = new JsonResult(e.getMessage());
             e.printStackTrace();
@@ -41,10 +48,36 @@ public class RegisterController {
         return result;
     }
 
-    @RequestMapping("/checkUserNameExist")
+    /**
+     * 检查手机号是否已经被注册
+     * @param username
+     * @return
+     */
+    @RequestMapping("/checkUserByPhoneNumber")
     @ResponseBody
-    public Boolean checkUserByName(String username){
-        return logininfoService.checkUserNameExist(username);
+    public JsonResult checkUserPhoneNumberExist(String mobile){
+    	JsonResult result = null;
+    	
+    	try {
+			//验证手机号
+			if (StringUtils.isEmpty(mobile)) {
+				throw new RuntimeException("手机号为空！");
+			}
+			//手机号规则校验
+			if (!PhoneFormatCheckUtils.isChinaPhoneLegal(mobile)) {
+				throw new RuntimeException("手机号不符合规则，仅支持大陆手机号注册！");
+			}
+			
+			boolean exist = logininfoService.checkUserPhoneNumberExist(mobile);
+			Map<String,Object> resultMap = new HashMap<String,Object>();
+			resultMap.put("isExist", exist);
+			
+			result = new JsonResult(true,"调用成功！");
+			result.setResult(resultMap);
+		} catch (Exception e) {
+			result = new JsonResult(false,e.getMessage());
+		}  
+		return result;
     }
 
 }

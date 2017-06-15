@@ -54,8 +54,13 @@ public class LogininfoServiceImpl implements ILogininfoService{
     }
 
     @Override
-    public boolean checkUserNameExist(String username) {
-        return (logininfoMapper.countUserByName(username)>0);
+    public boolean checkUserNameExist(String userName) {
+        return (logininfoMapper.countUserByName(userName)>0);
+    }
+    
+    @Override
+    public boolean checkUserPhoneNumberExist(String phoneNumber) {
+        return (logininfoMapper.countUserByMobile(phoneNumber)>0);
     }
 
     /**
