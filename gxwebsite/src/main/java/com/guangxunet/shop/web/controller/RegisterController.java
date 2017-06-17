@@ -27,7 +27,7 @@ public class RegisterController {
      * @param password
      * @return
      */
-    @RequestMapping("/register")
+    @RequestMapping("/register.screen")
     @ResponseBody
     public JsonResult register(String mobile, String password){
         JsonResult result = null;
@@ -53,7 +53,7 @@ public class RegisterController {
      * @param username
      * @return
      */
-    @RequestMapping("/checkUserByPhoneNumber")
+    @RequestMapping("/checkUserByPhoneNumber.do")
     @ResponseBody
     public JsonResult checkUserPhoneNumberExist(String mobile){
     	JsonResult result = null;
@@ -78,6 +78,19 @@ public class RegisterController {
 			result = new JsonResult(false,e.getMessage());
 		}  
 		return result;
+    }
+    
+    /**
+     * 检查手机号是否被注册
+     * @param mobile
+     * @return Boolean
+     */
+    @RequestMapping("/checkUserByPhoneNumberIsExist.screen")
+    @ResponseBody
+    public Boolean checkUserPhoneNumberIsExist(String mobile){
+    	Boolean isMobile = PhoneFormatCheckUtils.isChinaPhoneLegal(mobile);//手机号合法性校验
+    	
+    	return !logininfoService.checkUserPhoneNumberExist(mobile);
     }
 
 }

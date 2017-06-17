@@ -15,5 +15,5 @@ public class BidConst {
     /**
      * 发送手机验证码的间隔时间
      */
-    public static final long SEND_VERIFY_INTERVAL = 5;
+    public static final long SEND_VERIFY_INTERVAL = 120;
 }

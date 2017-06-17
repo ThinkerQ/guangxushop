@@ -28,9 +28,13 @@ public class VerifyCodeServiceTest {
 	
 	@Test
 	public void testVerify() throws Exception {
-		iVerifyCodeService.batchPublishSMSMessage();
+//		iVerifyCodeService.batchPublishSMSMessage("18211674995");
 	}
 	
+	/**
+	 * 发送手机验证码
+	 * @throws Exception
+	 */
 	@Test
 	public void testVerifyCode() throws Exception {
 //		iVerifyCodeService.sendVerifyCode("18211674995");

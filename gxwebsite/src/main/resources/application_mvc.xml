@@ -36,7 +36,7 @@
 	<!--拦截器-->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*"/>
+			<mvc:mapping path="/*.do"/>
 			<mvc:exclude-mapping path="/login.do"/><!--忽略login.do-->
 			<bean class="com.guangxunet.shop.web.introceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>

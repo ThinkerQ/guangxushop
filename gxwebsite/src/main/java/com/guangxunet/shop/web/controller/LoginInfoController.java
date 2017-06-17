@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.service.ILogininfoService;
-import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.JsonResult;
 import com.guangxunet.shop.base.util.UserContext;
 
@@ -26,8 +25,6 @@ import com.guangxunet.shop.base.util.UserContext;
 public class LoginInfoController {
 	@Autowired
 	private ILogininfoService iLogininfoService;
-	@Autowired
-	private IVerifyCodeService iVerifyCodeService;
 	
 	/**
 	 * 客户端用户登录
@@ -36,14 +33,14 @@ public class LoginInfoController {
 	 * @param request
 	 * @return 登录成功则返回登录者信息
 	 */
-	@RequestMapping("/login")
+	@RequestMapping("/login.do")
 	@ResponseBody
 	public JsonResult login(String mobile, String password, HttpServletRequest request){
 		JsonResult result = null;
 		
 		//非空检验
 		if (StringUtils.isEmpty(mobile)) {
-			throw new RuntimeException("用户名为空！");
+			throw new RuntimeException("手机号为空！");
 		}
 		
 		if (StringUtils.isEmpty(password)) {
@@ -54,7 +51,7 @@ public class LoginInfoController {
 		Logininfo login = iLogininfoService.login(mobile, password, request.getRemoteAddr(), Logininfo.USER_NORMAL);
 		
 		if (login == null) {
-			result = new JsonResult("用户名或密码错误，请重试！");
+			result = new JsonResult("手机号或密码错误，请重试！");
 		}else{
 			Logininfo current = UserContext.getCurrent();
 			Map<String,Object> userInfo = new HashMap<String,Object>();
@@ -68,57 +65,5 @@ public class LoginInfoController {
 		return result;
 	}
 	
-	/**
-	 * 给指定手机号发送短信验证码
-	 * @param phone
-	 * @return
-	 */
-	@RequestMapping("/send")
-	@ResponseBody
-	public JsonResult sendVerifyCode(String phone){
-		JsonResult result = null;
-		try {
-			if (StringUtils.isEmpty(phone)) {
-				result = new JsonResult("手机号为空！");
-			} else {
-				System.out.println("=======================手机号为===" + phone);
-				iVerifyCodeService.sendVerifyCode((phone));
-				System.out.println("=======================发送结果===");
-				result = new JsonResult(true, "发送完成");
-			} 
-		} catch (Exception e) {
-			result = new JsonResult(e.getMessage());
-		}
-		return result;
-	}
-	
-	/**
-	 * 根据手机号和验证码验证验证码的正确性
-	 * @param phone
-	 * @param code
-	 * @return
-	 */
-	@RequestMapping("/verify")
-	@ResponseBody
-	public JsonResult verifyCode(String phone,String code){
-		JsonResult result =null;
-		try {
-			if (StringUtils.isEmpty(phone)) {
-				throw new RuntimeException("手机号为空！");
-			}
-			
-			if (StringUtils.isEmpty(code)) {
-				throw new RuntimeException("验证码为空！");
-			}
-		
-			System.out.println("=======================入参===phone="+phone + ",code="+code);
-			boolean verifyCode = iVerifyCodeService.verifyCode(phone, code);
-			System.out.println("=======================验证结果===" + verifyCode);
-			result = new JsonResult(verifyCode, "验证结果" + verifyCode);
-		} catch (Exception e) {
-			result = new JsonResult(e.getMessage());
-		}
-		return result;
-	}
 	
 }
