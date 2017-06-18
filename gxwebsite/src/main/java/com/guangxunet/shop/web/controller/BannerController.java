@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,17 +28,27 @@ public class BannerController {
 	@Autowired
 	private IBannerService iBannerService;
 	
+	@Value("${gx.core.bannerLimitNumber}")
+    private int bannerLimitNumber;
+	
 	/**
 	 * 获取banner列表
 	 */
-	@RequestMapping("/getBannerList")
+	@RequestMapping("/getBannerList.do")
 	@ResponseBody()
 	public JsonResult getBannerList(){
 		JsonResult result = null;
 		try {
 			LoggerUtil.info("==================获取banner列表=====start===");
 			List<Banner> bannerList = iBannerService.selectAll();
+			
+			//限制最多存放6条banner信息
+			if (bannerList.size() > bannerLimitNumber) {
+				bannerList = bannerList.subList(0, bannerLimitNumber);
+			}
+			
 			LoggerUtil.info("==================获取banner列表=====结果===" + bannerList);
+			
 			if (bannerList != null && bannerList.size() > 0) {//集合非空
 				result = new JsonResult(true, "获取成功！");
 				result.setResult(bannerList);

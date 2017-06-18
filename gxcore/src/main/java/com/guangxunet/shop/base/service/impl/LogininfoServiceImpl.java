@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.guangxunet.shop.base.domain.Iplog;
 import com.guangxunet.shop.base.domain.Logininfo;
-import com.guangxunet.shop.base.domain.Userinfo;
 import com.guangxunet.shop.base.mapper.IpLogMapper;
 import com.guangxunet.shop.base.mapper.LogininfoMapper;
 import com.guangxunet.shop.base.service.ILogininfoService;

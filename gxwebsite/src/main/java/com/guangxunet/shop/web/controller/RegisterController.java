@@ -29,11 +29,15 @@ public class RegisterController {
      */
     @RequestMapping("/register.screen")
     @ResponseBody
-    public JsonResult register(String mobile, String password){
+    public JsonResult register(String mobile, String password,String confirmPwd){
         JsonResult result = null;
         try {
-        	if (StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)) {
+        	if (StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)||StringUtils.isEmpty(confirmPwd)) {
 				throw new RuntimeException("参数为空");
+			}
+        	
+        	if (StringUtils.equals(password, confirmPwd)) {
+        		throw new RuntimeException("两次输入的密码不一致，请重新输入！");
 			}
         	
             logininfoService.register(mobile, password);
