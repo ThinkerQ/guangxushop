@@ -12,7 +12,7 @@
 	<!--0.扫描注解-->
 	<context:component-scan base-package="com.guangxunet.shop"/>
 	<!--1.引入外部资源文件:jdbc和短信验证码账号相关资源文件-->
-	<context:property-placeholder location="classpath:jdbc.properties,classpath:sms.properties"/>
+	<context:property-placeholder location="classpath:jdbc.properties,classpath:sms.properties,classpath:gxshop_core.properties"/>
 	<!--2.数据源-->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}"/>
