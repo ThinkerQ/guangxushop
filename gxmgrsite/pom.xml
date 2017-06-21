@@ -46,6 +46,16 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
         </dependency>
+
+      <dependency>
+          <groupId>jstl</groupId>
+          <artifactId>jstl</artifactId>
+      </dependency>
+      <!-- standard -->
+      <dependency>
+          <groupId>taglibs</groupId>
+          <artifactId>standard</artifactId>
+      </dependency>
     </dependencies>
 
     <build>

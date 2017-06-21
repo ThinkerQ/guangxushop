@@ -1,6 +1,4 @@
-package com.guangxunet.shop.gxmgrsite.query;
-
-import com.guangxunet.shop.base.query.QueryObject;
+package com.guangxunet.shop.base.query;
 
 import lombok.Getter;
 import lombok.Setter;

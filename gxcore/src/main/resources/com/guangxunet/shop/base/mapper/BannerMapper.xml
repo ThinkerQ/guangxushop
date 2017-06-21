@@ -33,4 +33,16 @@
     select id, image_path, type, ad_url
     from banner
   </select>
+  <select id="selectByCount" resultType="long">
+    select count(1) from banner
+  </select>
+  <sql id="sqlSelect">
+    id, image_path, type, ad_url
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select  <include refid="sqlSelect"/>
+    <if test="page!=null">
+      limit #{start},#{rows}
+    </if>
+  </select>
 </mapper>

@@ -1,22 +1,19 @@
 package com.guangxunet.shop.base.service.impl;
 
 
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.guangxunet.shop.base.domain.Iplog;
 import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.mapper.IpLogMapper;
 import com.guangxunet.shop.base.mapper.LogininfoMapper;
 import com.guangxunet.shop.base.service.ILogininfoService;
-import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.BidConst;
 import com.guangxunet.shop.base.util.MD5;
 import com.guangxunet.shop.base.util.StringUtils;
 import com.guangxunet.shop.base.util.UserContext;
-import com.guangxunet.shop.base.vo.VerifyCodeVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**登陆相关实现
  * Created by Administrator on 2016/9/30.
@@ -63,6 +60,27 @@ public class LogininfoServiceImpl implements ILogininfoService{
     @Override
     public boolean checkUserPhoneNumberExist(String phoneNumber) {
         return (logininfoMapper.countUserByMobile(phoneNumber)>0);
+    }
+
+    @Override
+    public Logininfo supervisorLogin(String username, String password, String ip, int usertype) {
+        //登录操作时创建登陆日志对象
+        Iplog iplog = new Iplog();
+        iplog.setUserName(username);
+        iplog.setIp(ip);//ip由Controller控制器中传入，在HttpServletRequest中
+        iplog.setLoginTime(new Date());
+        iplog.setUserType(usertype);
+        Logininfo logininfo = logininfoMapper.supervisorLogin(username, MD5.encode(password),usertype);//
+        if(logininfo!=null){
+            UserContext.putCurrent(logininfo);//将登录者信息保存到session中
+            iplog.setLoginState(Iplog.STATE_SUCCESS);//登陆状态
+        }else{
+            iplog.setLoginState(Iplog.STATE_FAILED);
+        }
+        //保存iplog
+        ipLogMapper.insert(iplog);
+
+        return logininfo;
     }
 
     /**

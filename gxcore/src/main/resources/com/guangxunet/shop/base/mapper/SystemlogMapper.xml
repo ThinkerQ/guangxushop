@@ -14,8 +14,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyProperty="id" parameterType="com.guangxunet.shop.base.domain.Systemlog" useGeneratedKeys="true">
-    insert into systemlog (opUser_id, opTime, opIp, 
-      function, params)
+    insert into systemlog (opUser_id, opTime, opIp, function, params)
     values (#{opuserId,jdbcType=BIGINT}, #{optime,jdbcType=TIMESTAMP}, #{opip,jdbcType=VARCHAR}, 
       #{function,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR})
   </insert>

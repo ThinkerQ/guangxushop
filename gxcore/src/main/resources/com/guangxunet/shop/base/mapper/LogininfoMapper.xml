@@ -42,7 +42,12 @@
   <select id="login" resultMap="BaseResultMap">
     select id, state, username, password,usertype,mobile,email
     from logininfo
-    WHERE mobile = #{mobile} AND password = #{password} AND usertype = #{usertype}
+    WHERE mobile = #{mobile} AND password = #{password} AND usertype = #{userType}
+  </select>
+  <select id="supervisorLogin" resultMap="BaseResultMap">
+    select id, state, username, password,usertype,mobile,email
+    from logininfo
+    WHERE username = #{username} AND password = #{password} AND usertype = #{userType}
   </select>
 
   <select id="countByUserType" resultType="int">
@@ -63,7 +68,7 @@
     WHERE mobile = #{mobile}
   </select>
 
-  <select id="autoComplate" resultType="hashmap" useCache="false">
+  <select id="autoComplate" resultType="java.util.Map" useCache="false">
     select id,username
     from logininfo where username LIKE concat(#{word},'%') AND usertype = #{userType}
   </select>

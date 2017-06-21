@@ -40,4 +40,14 @@ public interface ILogininfoService {
      * @return
      */
     boolean checkUserPhoneNumberExist(String mobile);
+
+    /**
+     * 后台登陆
+     * @param username
+     * @param password
+     * @param ip
+     * @param usertype
+     * @return
+     */
+    Logininfo supervisorLogin(String username, String password, String ip, int userType);
 }

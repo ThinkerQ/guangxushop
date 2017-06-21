@@ -1,12 +1,11 @@
 package com.guangxunet.shop.base.mapper;
 
 
-import java.util.List;
-import java.util.Map;
-
+import com.guangxunet.shop.base.domain.Logininfo;
 import org.apache.ibatis.annotations.Param;
 
-import com.guangxunet.shop.base.domain.Logininfo;
+import java.util.List;
+import java.util.Map;
 
 public interface LogininfoMapper {
 
@@ -20,7 +19,9 @@ public interface LogininfoMapper {
     
     int countUserByMobile(String mobile);
 
-    Logininfo login(@Param("mobile") String mobile, @Param("password") String password,@Param("usertype")int usertype);
+    Logininfo login(@Param("mobile") String mobile, @Param("password") String password,@Param("userType")int userType);
+
+    Logininfo supervisorLogin(@Param("username") String username, @Param("password") String password,@Param("userType")int userType);
 
     int countByUserType(int userManager);
 

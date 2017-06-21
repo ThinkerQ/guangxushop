@@ -1,6 +1,8 @@
 package com.guangxunet.shop.base.mapper;
 
 import com.guangxunet.shop.base.domain.Banner;
+import com.guangxunet.shop.base.query.BannerQueryObject;
+
 import java.util.List;
 
 public interface BannerMapper {
@@ -37,4 +39,8 @@ public interface BannerMapper {
      * @return
      */
     int updateByPrimaryKey(Banner banner);
+
+    Long selectByCount();
+
+    List<Banner> selectByCondition(BannerQueryObject qo);
 }

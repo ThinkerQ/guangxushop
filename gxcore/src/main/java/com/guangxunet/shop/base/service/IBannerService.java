@@ -1,8 +1,10 @@
 package com.guangxunet.shop.base.service;
 
-import java.util.List;
-
 import com.guangxunet.shop.base.domain.Banner;
+import com.guangxunet.shop.base.page.PageResult;
+import com.guangxunet.shop.base.query.BannerQueryObject;
+
+import java.util.List;
 
 /** 
 * @author 作者 E-mail: King
@@ -39,8 +41,15 @@ public interface IBannerService {
 
     /**
      * 修改Banner记录
-     * @param record
+     * @param banner
      * @return
      */
     int updateByPrimaryKey(Banner banner);
+
+    /**
+     * 条件查询获取列表
+     * @param qo
+     * @return
+     */
+    PageResult selectByCondition(BannerQueryObject qo);
 }

@@ -1,13 +1,14 @@
 package com.guangxunet.shop.base.service.impl;
 
-import java.util.List;
-
+import com.guangxunet.shop.base.domain.Banner;
+import com.guangxunet.shop.base.mapper.BannerMapper;
+import com.guangxunet.shop.base.page.PageResult;
+import com.guangxunet.shop.base.query.BannerQueryObject;
+import com.guangxunet.shop.base.service.IBannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.guangxunet.shop.base.domain.Banner;
-import com.guangxunet.shop.base.mapper.BannerMapper;
-import com.guangxunet.shop.base.service.IBannerService;
+import java.util.List;
 
 /** 
 * @author 作者 E-mail: King
@@ -43,5 +44,18 @@ public class BannerServiceImpl implements IBannerService{
 	public int updateByPrimaryKey(Banner banner) {
 		return bannerMapper.updateByPrimaryKey(banner);
 	}
-	
+
+	@Override
+	public PageResult selectByCondition(BannerQueryObject qo) {
+		PageResult result = null;
+		Long count = bannerMapper.selectByCount();
+		if (count > 0) {
+			List<Banner> banners = bannerMapper.selectByCondition(qo);
+			result = new PageResult(count, banners);
+			return result;
+		} else {
+			return PageResult.result;
+		}
+	}
+
 }
