@@ -1,6 +1,7 @@
 package com.guangxunet.shop.base.service.impl;
 
 
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -72,7 +73,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
      * 验证手机验证码
      */
     @Override
-    public boolean verifyCode(String phoneNumber, String verifyCode) {
+    public boolean verifyCode(String phoneNumber, String verifyCode) throws Exception{
     	if (StringUtils.isEmpty(phoneNumber)) {
 			throw new RuntimeException("手机号为空！");
 		}
@@ -96,7 +97,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
         	throw new RuntimeException("验证码错误!");
 		}
         
-        if (DateUtil.getBetweenSecond(vc.getSendTime(),new Date()) > BidConst.SEND_VERIFY_INTERVAL) {
+        if (DateUtil.getBetweenSecond(vc.getSendTime(),new Date()) > BidConst.SEND_VERIFY_EXPIRY_DATE) {
         	throw new RuntimeException("验证码已过期!");
 		}
         
@@ -126,7 +127,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
         
         // 发送短信
         //sendMessageByThisSystem(phoneNumber, code);//使用本系统模拟发送验证码
-        this.batchPublishSMSMessage(phoneNumber);//通过阿里云短信服务发送验证码
+//        this.batchPublishSMSMessage(phoneNumber,code);//通过阿里云短信服务发送验证码
             
     }
 
@@ -191,14 +192,14 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
     	
     	//2.手机号是否为已注册用户
     	boolean numberExist = logininfoService.checkUserPhoneNumberExist(phoneNumber);
-    	if (!numberExist) {
-    		throw new RuntimeException("该用户不存在！");
+    	if (numberExist) {
+    		throw new RuntimeException("手机号已被注册！");
 		}
     	
     	//3.发送时间间隔不可超出限制
         VerifyCodeVO vo = UserContext.getVerifyCode();
     	if (vo != null && DateUtil.getBetweenSecond(vo.getSendTime(), new Date()) <= BidConst.SEND_VERIFY_INTERVAL) {
-    		throw new RuntimeException("发送过于频繁!");
+    		throw new RuntimeException("发送过于频繁，每分钟只可获取一次验证码!");
     	}
     	
     	
@@ -209,10 +210,12 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
 
 	/**
      * 通过阿里云短信发送接口发送验证码（可批量） 
+	 * @throws UnsupportedEncodingException 
      */
 	@Override
-	public void batchPublishSMSMessage(String phoneNumber) {
-		
+	public void batchPublishSMSMessage(String phoneNumber,String code) throws UnsupportedEncodingException {
+			String _YourSignName = new String(YourSignName.getBytes("ISO-8859-1"),"utf-8");
+			LoggerUtil.info("=======================签名===_YourSignName="+_YourSignName);
 		/**
          * Step 1. 获取主题引用
          */
@@ -232,13 +235,13 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
         MessageAttributes messageAttributes = new MessageAttributes();
         BatchSmsAttributes batchSmsAttributes = new BatchSmsAttributes();
         // 3.1 设置发送短信的签名（SMSSignName）
-        batchSmsAttributes.setFreeSignName(YourSignName);
+        batchSmsAttributes.setFreeSignName(_YourSignName);
         // 3.2 设置发送短信使用的模板（SMSTempateCode）
         batchSmsAttributes.setTemplateCode(YourSMSTemplateCode);
         // 3.3 设置发送短信所使用的模板中参数对应的值（在短信模板中定义的，没有可以不用设置）
         BatchSmsAttributes.SmsReceiverParams smsReceiverParams = new BatchSmsAttributes.SmsReceiverParams();
-        smsReceiverParams.setParam("name", "耿术强");
-        smsReceiverParams.setParam("code", "736221");
+        smsReceiverParams.setParam("name", phoneNumber);//用户名
+        smsReceiverParams.setParam("code", code);
         // 3.4 增加接收短信的号码
         batchSmsAttributes.addSmsReceiver(phoneNumber, smsReceiverParams);
         messageAttributes.setBatchSmsAttributes(batchSmsAttributes);
@@ -247,6 +250,8 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
              * Step 4. 发布SMS消息
              */
             TopicMessage ret = topic.publishMessage(msg, messageAttributes);
+            
+            System.out.println("ret: " + ret);
             System.out.println("MessageId: " + ret.getMessageId());
             System.out.println("MessageMD5: " + ret.getMessageBodyMD5());
         } catch (ServiceException se) {

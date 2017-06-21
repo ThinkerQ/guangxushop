@@ -29,6 +29,40 @@
 </style>
 <script type="text/javascript">
 	$(function(){
+		//给发送短信按钮添加时间sendVerifyCode
+		$("#sendVerifyCode").click(function(){
+			var _this=$(this);
+			_this.attr("disabled",true);
+			//1,发送一个Ajax请求;
+			$.ajax({
+				url:"/sendVerifyCode.screen",
+				dataType:"json",
+				type:"POST",
+				data:{phoneNumber:$("#mobile").val()},
+				success:function(data){
+					console.log(data);
+					if(data.success){
+						var sec=5;
+						var timer=window.setInterval(function(){
+							sec--;
+							if(sec>0){
+								_this.text(sec+"秒重新发送");
+							}else{
+								//去掉定时器
+								window.clearInterval(timer);
+								_this.text("重新发送验证码");
+								_this.attr("disabled",false);
+							}
+						},1000);
+					}else{
+						$.messager.popup(data.message);
+						_this.attr("disabled",false);
+					}
+				}
+			});
+		});
+		
+		//表单校验
 		$("#registerForm").validate({
 			rules:{
 				mobile:{
@@ -82,7 +116,7 @@
 								window.location.href="/login.jsp";
 							});
 						}else{
-							$.messager.alert(data.msg);
+							$.messager.alert(data.message);
 						}
 					}
 				});
@@ -121,7 +155,15 @@
 				<label class="control-label col-sm-2">手机号</label>
 				<div class="col-sm-10">
 					<input type="text" autocomplete="off" name="mobile" class="form-control" id="mobile"/>
+					<button id="sendVerifyCode" class="btn btn-success" type="button" autocomplate="off">发送验证码</button>
 					<p class="help-block">手机号为11位大陆手机号</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2">验证码</label>
+				<div class="col-sm-10">
+					<input type="text" autocomplete="off" name="verifycode" class="form-control" id="verifycode"/>
+					<p class="help-block">输入验证码</p>
 				</div>
 			</div>
 			<div class="form-group">
@@ -144,7 +186,7 @@
 						同意协议并注册
 					</button>
 					&emsp;&emsp;
-					<a href="/login.html" class="text-primary">已有账号，马上登录</a>
+					<a href="/login.jsp" class="text-primary">已有账号，马上登录</a>
 					
 					<p style="padding-left: 50px;margin-top: 15px;">
 						<a href="#">《使用协议说明书》</a>
@@ -157,14 +199,14 @@
 	<div class="container-foot-2">
 		<div class="context">
 			<div class="left">
-				<p>专注于高级Java开发工程师的培养</p>
-				<p>版权所有：&emsp;2015广州小码哥教育科技有限公司</p>
-				<p>地&emsp;&emsp;址：&emsp;广州市天河区棠下荷光三横路盛达商务园D座5楼</p>
-				<p>电&emsp;&emsp;话： 020-29007520&emsp;&emsp;
-					邮箱：&emsp;service@520it.com</p>
+				<p>专注于软件开发</p>
+				<p>版权所有：&emsp;*****科技有限公司</p>
+				<p>地&emsp;&emsp;址：&emsp;上海市浦东新区华夏东路益华路</p>
+				<p>电&emsp;&emsp;话： 020-0000000&emsp;&emsp;
+					邮箱：&emsp;king@gengshuqiang.com</p>
 				<p>
 					<a href="http://www.miitbeian.gov.cn" style="color: #ffffff">ICP备案
-						：粤ICP备字1504547</a>
+						：沪ICP备字1504547</a>
 				</p>
 				<p>
 					<a href="http://www.gzjd.gov.cn/wlaqjc/open/validateSite.do" style="color: #ffffff">穗公网安备：44010650010086</a>

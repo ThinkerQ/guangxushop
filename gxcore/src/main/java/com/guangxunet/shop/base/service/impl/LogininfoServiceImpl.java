@@ -11,10 +11,12 @@ import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.mapper.IpLogMapper;
 import com.guangxunet.shop.base.mapper.LogininfoMapper;
 import com.guangxunet.shop.base.service.ILogininfoService;
+import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.BidConst;
 import com.guangxunet.shop.base.util.MD5;
 import com.guangxunet.shop.base.util.StringUtils;
 import com.guangxunet.shop.base.util.UserContext;
+import com.guangxunet.shop.base.vo.VerifyCodeVO;
 
 /**登陆相关实现
  * Created by Administrator on 2016/9/30.
@@ -23,6 +25,7 @@ import com.guangxunet.shop.base.util.UserContext;
 public class LogininfoServiceImpl implements ILogininfoService{
     @Autowired
     private LogininfoMapper logininfoMapper;
+    
     @Autowired
     private IpLogMapper ipLogMapper;
 

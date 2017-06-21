@@ -13,7 +13,13 @@ public class BidConst {
     public static final String DEFAULT_ADMIN_PASSWORD = "1111";
     
     /**
-     * 发送手机验证码的间隔时间
+     * 短信验证码有效期120s
      */
-    public static final long SEND_VERIFY_INTERVAL = 120;
+    public static final long SEND_VERIFY_EXPIRY_DATE = 120;
+    
+    /**
+     * 短信验证码发送时间间隔60s
+     */
+    public static final long SEND_VERIFY_INTERVAL = 60;
+    
 }

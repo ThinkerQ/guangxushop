@@ -26,5 +26,5 @@ public interface IVerifyCodeService {
 	/**
 	 * 批量发送短信（阿里云）
 	 */
-	void batchPublishSMSMessage(String phoneNumber) throws Exception;
+	void batchPublishSMSMessage(String phoneNumber,String code) throws Exception;
 }

@@ -1,13 +1,11 @@
 package com.guangxunet.shop.web.controller;
 
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
 import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.JsonResult;
 import com.guangxunet.shop.base.util.LoggerUtil;
@@ -25,7 +23,7 @@ public class SendVerifyCodeController {
      * @param phoneNumber
      * @return
      */
-    @RequestMapping("/sendVerifyCode.do")
+    @RequestMapping("/sendVerifyCode.screen")
     @ResponseBody
     public JsonResult sendVerifyCode(String phoneNumber){
         JsonResult result = null;
