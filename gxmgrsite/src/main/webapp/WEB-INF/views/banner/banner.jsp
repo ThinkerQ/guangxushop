@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri="http://www.520it.com/java/crm" prefix="myFn" %>
 <html>
 <head>
     <title>广告管理页面</title>
@@ -11,64 +10,36 @@
 <table id="banner_datagrid"></table>
 <%--页面按钮--%>
 <div id="banner_datagrid_btn">
-    <div>
         <%--引用自定义标签的方法--%>
-        <c:if test="${myFn:checkPermission('com._520it.crm.web.controller.EmployeeController:save')}">
-        </c:if>
         <a class="easyui-linkbutton" iconCls="icon-add" plain="true" data-cmd="add">新增</a>
-        <c:if test="${myFn:checkPermission('com._520it.crm.web.controller.EmployeeController:update')}">
-        </c:if>
         <a class="easyui-linkbutton" iconCls="icon-edit" plain="true" data-cmd="edit">编辑</a>
-        <a class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-cmd="remove">离职</a>
+        <a class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-cmd="remove">删除</a>
         <a class="easyui-linkbutton" iconCls="icon-reload" plain="true" data-cmd="reload">刷新</a>
-    </div>
-    <div>
-        <form id="banner_SearchForm">
-            关键字:<input type="text" name="keyword"/>
-            日期:<input class="easyui-datebox" name="beginDate">
-            -<input class="easyui-datebox" name="endDate">
-            状态:<select name="state">
-            <option value="">全部</option>
-            <option value="1">在职</option>
-            <option value="0">离职</option>
-        </select>
-            <a class="easyui-linkbutton" iconCls="icon-search" data-cmd="searchContent">查询</a>
-        </form>
-    </div>
 </div>
 <%--对话框--%>
 <div id="banner_dialog">
     <form id="banner_dialog_form">
         <input type="hidden" name="id"/>
+        <input type="hidden" name="imagePath" id="imagePath" />
+
         <table style="margin-top: 20px" align="center">
             <tr>
-                <td>账号</td>
-                <td><input type="text" name="username"/></td>
+                <td>广告类型:</td>
+                <td><input type="text" name="type"/></td>
             </tr>
             <tr>
-                <td>真实姓名</td>
-                <td><input type="text" name="realName"/></td>
-            </tr>
-            <tr>
-                <td>联系电话</td>
-                <td><input type="text" name="tel"/></td>
-            </tr>
-            <tr>
-                <td>邮箱</td>
-                <td><input type="text" name="email"/></td>
-            </tr>
-            <tr>
-                <td>部门</td>
-                <td><input class="easyui-combobox" name="dept.id"
-                           data-options="url:'/department_list',valueField:'id',textField:'name'"/></td>
-            </tr>
-            <tr>
-                <td>角色</td>
-                <td><input class="easyui-combobox" id="banner_roleCombo"
-                           data-options="url:'/role_queryByEmp',valueField:'id',textField:'name',multiple:true"/></td>
+                <td>广告链接:</td>
+                <td><input type="text" name="adUrl"/></td>
             </tr>
         </table>
     </form>
+    <div align="center">
+        <form id="upload_form" enctype="multipart/form-data" method="post">
+            <input type="file" name="file" value="选择上传文件"/>
+        </form>
+        <a class="easyui-linkbutton" iconCls="icon-add" data-cmd="upload">上传</a>
+        <img src="" id="loanImage">
+    </div>
 </div>
 <%--对话按钮--%>
 <div id="banner_dialog_btn">
@@ -79,12 +50,14 @@
 <script type="text/javascript" >
     $(function () {
         //代码重构,统一管理变量和方法
-        var bannerDatagrid, bannerDatagridBtnA, bannerDialog, bannerDialogForm, bannerSearchForm, inputNameId;
+        var bannerDatagrid, bannerDatagridBtnA, bannerDialog, bannerDialogForm, bannerSearchForm, inputNameId,uploadForm,imagePath;
         bannerDatagrid = $("#banner_datagrid");
         bannerDatagridBtnA = $("#banner_datagrid_btn a");
         bannerDialog = $("#banner_dialog");
         bannerDialogForm = $("#banner_dialog_form");
         bannerSearchForm = $("#banner_SearchForm");
+        uploadForm = $("#upload_form");
+        imagePath = $("#imagePath");
         inputNameId = $("input[name=id]");
         bannerDatagrid.datagrid({
             url: "/supervisor/banner/bannerList.do",
@@ -94,7 +67,7 @@
             singleSelect: true,
             fitColumns: true,
             columns: [[
-                {title: "账号", field: "id", width: 1, align: "center"},
+                {title: "编号", field: "id", width: 1, align: "center"},
                 {title: "图片路径", field: "imagePath", width: 1, align: "center"},
                 {title: "类型", field: "type", width: 1,formatter: deptFormatter, align: "center"},
                 {title: "广告链接", field: "adUrl", width: 1, align: "center"}
@@ -114,8 +87,8 @@
         });
         //对话框
         bannerDialog.dialog({
-            width: 300,
-            height: 330,
+            width: 350,
+            height: 350,
             buttons: "#banner_dialog_btn",
             closed: true
         });
@@ -126,6 +99,22 @@
                 bannerDialog.dialog("open");
                 bannerDialog.dialog("setTitle", "新增");
                 bannerDialogForm.form("clear");
+            },
+            //上传
+            upload: function () {
+                var path = $("imagePath").val();
+
+                if(path == "") {
+                    alert("请选择上传的图片");
+                    return;
+                }
+                uploadForm.form('submit', {
+                    url: '/supervisor/banner/bannerUpload.do',
+                    success: function (data) {
+                        imagePath.val(data);
+                        $("#loanImage").src(data);
+                    }
+                })
             },
             //编辑
             edit: function () {
@@ -193,19 +182,13 @@
                 //确定发送请求的URL
                 var url;
                 if (id) {
-                    url = "/banner_update";
+                    url = "/supervisor/banner/bannerUpdate.do";
                 } else {
-                    url = "/banner_save";
+                    url = "/supervisor/banner/bannerSave.do";
                 }
                 //提交表单前
                 bannerDialogForm.form("submit", {
                     url: url,
-                    onSubmit:function (param) {
-                        var ids = $("#banner_roleCombo").combobox("getValues");
-                        for(var i=0;i<ids.length;i++){
-                            param["roles["+i+"].id"] = ids[i];
-                        }
-                    },
                     success: function (data) {
                         //JOSN字符串转对象
                         data = $.parseJSON(data);
@@ -252,13 +235,6 @@
             return value.name;
         } else {
             return value;
-        }
-    }
-    function stateFormatter(value, record, index) {
-        if (value) {
-            return "在职";
-        } else {
-            return "离职";
         }
     }
 </script>

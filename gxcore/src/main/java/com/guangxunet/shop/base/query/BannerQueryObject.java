@@ -11,7 +11,6 @@ import java.util.Date;
  */
 @Setter@Getter
 public class BannerQueryObject extends QueryObject {
-    private String keyword;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date beginDate;
     @DateTimeFormat(pattern="yyyy-MM-dd")

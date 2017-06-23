@@ -35,12 +35,21 @@ public interface BannerMapper {
 
     /**
      * 修改Banner记录
-     * @param record
+     * @param banner
      * @return
      */
     int updateByPrimaryKey(Banner banner);
 
+    /**
+     * 查询总条数
+     * @return
+     */
     Long selectByCount();
 
+    /**
+     * 条件查询
+     * @param qo
+     * @return
+     */
     List<Banner> selectByCondition(BannerQueryObject qo);
 }

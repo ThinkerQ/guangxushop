@@ -52,4 +52,5 @@ public interface IBannerService {
      * @return
      */
     PageResult selectByCondition(BannerQueryObject qo);
+
 }
