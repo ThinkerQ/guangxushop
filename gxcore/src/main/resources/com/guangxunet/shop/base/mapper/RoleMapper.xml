@@ -36,10 +36,10 @@
     select id, sn, name
     from role
   </select>
-  <select id="queryRoleByLid" >
+  <select id="queryRoleByLid" resultType="java.lang.Long">
     select r_id from logininfo_role  where l_id = #{lid}
   </select>
-  <select id="selectByCount" >
+  <select id="selectByCount" resultType="java.lang.Long">
     select count(1) from role
   </select>
   <select id="selectByCondition" resultMap="baseResultMap">

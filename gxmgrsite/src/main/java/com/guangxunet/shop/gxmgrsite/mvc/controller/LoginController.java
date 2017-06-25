@@ -20,6 +20,7 @@ import java.util.List;
  * Created by chenmy on 2017/6/12.
  */
 @Controller
+@RequestMapping("/supervisor")
 public class LoginController extends SupervisorController{
 
     @Autowired
@@ -38,7 +39,7 @@ public class LoginController extends SupervisorController{
     @ResponseBody
     public JsonResult login(String username, String password, HttpServletRequest request){
         JsonResult result = null;
-        Logininfo logininfo = iLogininfoService.login(username, password, request.getRemoteAddr(), Logininfo.USER_MANAGER);
+        Logininfo logininfo = iLogininfoService.supervisorLogin(username, password, request.getRemoteAddr(), Logininfo.USER_MANAGER);
 
         if (logininfo == null) {
             result = new JsonResult("用户名或密码错误，请重试！");

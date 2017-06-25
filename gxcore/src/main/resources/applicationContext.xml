@@ -62,4 +62,10 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
 		<property name="basePackage" value="com.guangxunet.shop.*.mapper"/>
 	</bean>
+	<!-- 配置文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>#{1024*1024*10}</value>
+		</property>
+	</bean>
 </beans>

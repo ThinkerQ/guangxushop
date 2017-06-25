@@ -1,4 +1,4 @@
-package com.guangxunet.shop.gxmgrsite.domain;
+package com.guangxunet.shop.base.domain;
 
 import java.util.List;
 

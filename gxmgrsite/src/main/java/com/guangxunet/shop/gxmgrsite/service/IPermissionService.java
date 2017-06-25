@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.guangxunet.shop.base.page.PageResult;
 import com.guangxunet.shop.base.query.QueryObject;
-import com.guangxunet.shop.gxmgrsite.domain.Permission;
+import com.guangxunet.shop.base.domain.Permission;
 
 /**
  * Created by chenmy on 2017/6/10.

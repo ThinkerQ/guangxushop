@@ -1,9 +1,9 @@
-package com.guangxunet.shop.gxmgrsite.mapper;
+package com.guangxunet.shop.base.mapper;
+
+import com.guangxunet.shop.base.domain.Permission;
+import com.guangxunet.shop.base.query.QueryObject;
 
 import java.util.List;
-
-import com.guangxunet.shop.base.query.QueryObject;
-import com.guangxunet.shop.gxmgrsite.domain.Permission;
 
 public interface PermissionMapper {
     int deleteByPrimaryKey(Long id);

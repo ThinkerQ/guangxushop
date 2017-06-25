@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import com.guangxunet.shop.base.page.PageResult;
 import com.guangxunet.shop.base.query.QueryObject;
-import com.guangxunet.shop.gxmgrsite.domain.Permission;
-import com.guangxunet.shop.gxmgrsite.mapper.PermissionMapper;
+import com.guangxunet.shop.base.domain.Permission;
+import com.guangxunet.shop.base.mapper.PermissionMapper;
 import com.guangxunet.shop.gxmgrsite.mvc.controller.SupervisorController;
 import com.guangxunet.shop.gxmgrsite.service.IPermissionService;
 import com.guangxunet.shop.gxmgrsite.util.PermissionUtils;

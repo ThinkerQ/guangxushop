@@ -1,18 +1,17 @@
 package com.guangxunet.shop.gxmgrsite.util;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.guangxunet.shop.base.domain.Logininfo;
+import com.guangxunet.shop.base.domain.Permission;
 import com.guangxunet.shop.base.domain.SystemMenu;
 import com.guangxunet.shop.base.util.BidConst;
 import com.guangxunet.shop.base.util.Constants;
 import com.guangxunet.shop.base.util.UserContext;
-import com.guangxunet.shop.gxmgrsite.domain.Permission;
 import com.guangxunet.shop.gxmgrsite.service.IPermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+import java.util.List;
 
 @Component
 public class PermissionUtils {
@@ -66,7 +65,7 @@ public class PermissionUtils {
         for (int i = menus.size() - 1; i >= 0; i--) {
             menu = menus.get(i);
             //查看是否有权限
-            if (checkPermission(menu.getUrl())) {
+            if (checkPermission(menu.getAttributes())) {
                 //子菜单再查看
                 /*if (menu.getChildren() != null && menu.getChildren().size() > 0) {
                     getMenuForPermission(menu.getChildren());//递归操作

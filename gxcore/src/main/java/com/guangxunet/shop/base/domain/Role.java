@@ -1,12 +1,10 @@
-package com.guangxunet.shop.gxmgrsite.domain;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.guangxunet.shop.base.domain.BaseDomain;
+package com.guangxunet.shop.base.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 角色

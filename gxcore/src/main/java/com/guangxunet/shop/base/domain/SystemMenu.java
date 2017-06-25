@@ -17,7 +17,7 @@ public class SystemMenu extends BaseDomain{
 
     private Byte checked;
 
-    private String url;
+    private String attributes;
 
     private Long parentId;//父菜单
 
