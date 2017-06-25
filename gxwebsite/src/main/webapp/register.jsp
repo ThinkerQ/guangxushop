@@ -35,7 +35,7 @@
 			_this.attr("disabled",true);
 			//1,发送一个Ajax请求;
 			$.ajax({
-				url:"/sendVerifyCode.screen",
+				url:"/SendVerifyCode/sendVerifyCode.screen",
 				dataType:"json",
 				type:"POST",
 				data:{phoneNumber:$("#mobile").val()},
@@ -70,7 +70,7 @@
 					isMobile:true,
 					remote:{
 						type:"POST",
-						url:"/checkUserByPhoneNumberIsExist.screen"
+						url:"/Register/checkUserByPhoneNumberIsExist.screen"
 					}
 				},
 				password:{
@@ -149,7 +149,7 @@
 	
 	<!-- 网页内容 -->
 	<div class="container">  
-		<form id="registerForm" class="form-horizontal el-register-form"  action="/register.screen" method="post" >
+		<form id="registerForm" class="form-horizontal el-register-form"  action="/Register/register.screen" method="post" >
 			<p class="h4" style="margin: 10px 10px 20px;color:#999;">请填写注册信息，点击“提交注册”即可完成注册！</p>
 			<div class="form-group">
 				<label class="control-label col-sm-2">手机号</label>

@@ -111,7 +111,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
 
     
     /**
-     * 发送短信验证码
+     * 发送短信验证码：用于注册
      */
     public void sendVerifyCode(String phoneNumber) throws Exception{
     	//0.发送前校验：
@@ -131,6 +131,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
             
     }
 
+    
     /**
      * 通过本系统模拟发送短信验证码
      * @param phoneNumber
@@ -190,11 +191,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
     		throw new RuntimeException("手机号不正确！");
 		}
     	
-    	//2.手机号是否为已注册用户
-    	boolean numberExist = logininfoService.checkUserPhoneNumberExist(phoneNumber);
-    	if (numberExist) {
-    		throw new RuntimeException("手机号已被注册！");
-		}
+    	
     	
     	//3.发送时间间隔不可超出限制
         VerifyCodeVO vo = UserContext.getVerifyCode();
@@ -265,4 +262,7 @@ public class VerifyCodeServiceImpl implements IVerifyCodeService {
         }
         client.close();
 	}
+
+
+	
 }

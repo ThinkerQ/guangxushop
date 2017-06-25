@@ -20,6 +20,7 @@ import shaded.org.apache.commons.lang3.StringUtils;
  * Created by Administrator on 2016/9/30.
  */
 @Controller
+@RequestMapping("Register")
 public class RegisterController {
     @Autowired
     private ILogininfoService logininfoService;
@@ -70,7 +71,7 @@ public class RegisterController {
      * @param username
      * @return
      */
-    @RequestMapping("/checkUserByPhoneNumber.do")
+    @RequestMapping("/checkUserByPhoneNumber.screen")
     @ResponseBody
     public JsonResult checkUserPhoneNumberExist(String mobile){
     	JsonResult result = null;

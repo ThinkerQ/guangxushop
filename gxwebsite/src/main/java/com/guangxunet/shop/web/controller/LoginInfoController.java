@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.service.ILogininfoService;
+import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.JsonResult;
 import com.guangxunet.shop.base.util.UserContext;
 
@@ -22,10 +25,12 @@ import com.guangxunet.shop.base.util.UserContext;
 * 类说明 前台系统用户登录
 */
 @Controller
+@RequestMapping("Login")
 public class LoginInfoController {
 	@Autowired
 	private ILogininfoService iLogininfoService;
-	
+	@Autowired
+    private IVerifyCodeService verifyCodeService;
 	/**
 	 * 客户端用户登录
 	 * @param username
@@ -65,5 +70,30 @@ public class LoginInfoController {
 		return result;
 	}
 	
+	/**
+	 * 忘记密码第二步：跳转到输入验证码页面
+	 * @param phoneNumber
+	 * @param model
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping("/findPwd2.screen")
+	public String findPwd2(String phoneNumber,Model model) throws Exception{
+		model.addAttribute("phoneNumber", phoneNumber);
+		verifyCodeService.sendVerifyCode(phoneNumber);
+		return "findPwd2";
+	}
 	
+	/**
+	 * 忘记密码第三步：跳转到重置密码页面
+	 * @param phoneNumber
+	 * @param model
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping("/findPwd3.screen")
+	public String findPwd3(String phoneNumber,Model model) throws Exception{
+		model.addAttribute("phoneNumber", phoneNumber);
+		return "findPwd3";
+	}
 }

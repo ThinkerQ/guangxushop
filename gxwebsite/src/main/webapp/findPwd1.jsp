@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>云购商城->用户登录</title>
+<title>云购商城->找回密码</title>
 <link rel="stylesheet" href="/js/bootstrap-3.3.2-dist/css/bootstrap.css" type="text/css" />
 <link rel="stylesheet" href="/css/core.css" type="text/css" />
 <script type="text/javascript" src="/js/jquery/jquery-2.1.3.js"></script>
@@ -32,12 +32,10 @@
 		$("#loginForm").validate({
 			rules:{
 				mobile:"required",
-				password:"required"
 			}
 			,
 			messages:{
 				mobile:"请输入手机号",
-				password:"请输入密码"
 			},
 			errorClass:"text-danger",
 			errorElement:"em",
@@ -51,9 +49,13 @@
 		$("#loginForm").ajaxForm({
 			success:function(data){
 				if(data.success){
-					$.messager.confirm("提示","登陆成功，点击确定进入个人中心",function(){
-						window.location.href="/personal.do";
-					});
+					if (data.result.isExist) {
+						$.messager.confirm("提示","验证通过，点击进入下一步",function(){
+							window.location.href="/Login/findPwd2.screen?"+"phoneNumber=18211674995";
+						});
+					}else{
+						$.messager.popup("非注册用户！");
+					}
 				}else{
 					$.messager.popup(data.message);
 				}
@@ -88,28 +90,21 @@
 	
 	<!-- 网页内容 --> 
 	<div class="container">  
-		<form id="loginForm" class="form-horizontal el-login-form" action="/Login/login.do" method="post" >
-			<p class="h4" style="margin: 10px 10px 20px 110px;color:#999;">请输入手机号和密码</p> 
+		<form id="loginForm" class="form-horizontal el-login-form" action="/Register/checkUserByPhoneNumber.screen" method="post" >
+			<p class="h4" style="margin: 10px 10px 20px 110px;color:#999;">找回密码  <font color="blue">1.输入手机号</font>  2.输入验证码    3.设置密码</p> 
 			<div class="form-group">
 				<label class="control-label col-sm-2">手机号</label>
 				<div class="col-sm-10">
-					<input type="text" autocomplete="off" name="mobile" class="form-control" value="18211674995"/>
+					<input type="text" autocomplete="off" id="mobile" name="mobile" class="form-control" placeholder="输入手机号"/>
 				</div> 
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2">密&emsp;码</label>
-				<div class="col-sm-10">
-					<input type="password" autocomplete="off" name="password" class="form-control" value="admin"/>
-				</div>
 			</div>
 			<div class="form-gorup">
 				<div class="col-sm-offset-3">
 					<button type="submit" class="btn btn-success" style="width: 100px;">
-						登录
+						下一步
 					</button>
 					&emsp;&emsp;
 					<a href="/register.jsp">新用户，马上注册</a></br></br>
-					<a href="/findPwd1.jsp">忘记密码</a></br></br>
 				</div>
 			</div>
 		</form>
