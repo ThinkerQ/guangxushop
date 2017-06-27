@@ -41,6 +41,7 @@
   </sql>
   <select id="selectByCondition" resultMap="BaseResultMap">
     select  <include refid="sqlSelect"/>
+    from banner
     <if test="page!=null">
       limit #{start},#{rows}
     </if>

@@ -28,9 +28,6 @@
             <div title="首页" closable="true">芳芳老师欢迎您</div>
         </div>
     </div>
-    <div data-options="region:'south'"  style="height:50px;background: url('/js/banner-pic.gif'),no-repeat;background-size: cover">
-        <center>版权声明</center>
-    </div>
 </div>
 </body>
 <script type="text/javascript" >
