@@ -1,21 +1,23 @@
 package com.guangxunet.shop.base.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.guangxunet.shop.base.domain.Banner;
 import com.guangxunet.shop.base.mapper.BannerMapper;
 import com.guangxunet.shop.base.page.PageResult;
 import com.guangxunet.shop.base.query.BannerQueryObject;
 import com.guangxunet.shop.base.service.IBannerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /** 
 * @author 作者 E-mail: King
 * @version 创建时间：2017年6月12日 上午12:00:40 
 * 类说明 首页Banner相关服务
 */
-@Service
+@Service("iBannerService")
 public class BannerServiceImpl implements IBannerService{
 	@Autowired
 	private BannerMapper bannerMapper;

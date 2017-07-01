@@ -34,7 +34,7 @@ public class LoggerUtil {
                 StringWriter sw = new StringWriter();
                 e.printStackTrace(new PrintWriter(sw, true));
                 String str = sw.toString();
-                log.info(location + str);
+                log.info(str);
             } else {
                 log.info(location + obj.toString());
             }

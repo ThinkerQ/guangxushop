@@ -48,9 +48,10 @@
 		$("#loginForm").ajaxForm({
 			success:function(data){
 				if(data.success){
-						$.messager.confirm("提示","短信验证码正确，下一步重新设置密码",function(){
-							window.location.href="/Login/findPwd2.screen?"+"phoneNumber=18211674995";
-						});
+						/* $.messager.confirm("提示","短信验证码正确，下一步重新设置密码",function(){
+							window.location.href="/Login/findPwd3.screen?"+"phoneNumber=18211674995";
+						}); */
+							window.location.href="/Login/findPwd3.screen?"+"phoneNumber=18211674995";
 				}else{
 					$.messager.popup(data.message);
 				}

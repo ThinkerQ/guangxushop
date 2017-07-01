@@ -26,4 +26,11 @@ public interface LogininfoMapper {
     int countByUserType(int userManager);
 
     List<Map<String,Object>> autoComplate(@Param("word")String word, @Param("userType")int userType);
+
+    /**
+     * 修改密码
+     * @param phoneNumber
+     * @param newPassword
+     */
+	int resetPassword(@Param("phoneNumber")String phoneNumber, @Param("newPassword")String newPassword);
 }

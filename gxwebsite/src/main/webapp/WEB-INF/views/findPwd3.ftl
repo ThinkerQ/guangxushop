@@ -81,8 +81,8 @@
 		$("#loginForm").ajaxForm({
 			success:function(data){
 				if(data.success){
-						$.messager.confirm("提示","短信验证码正确，下一步重新设置密码",function(){
-							window.location.href="/findPwd3.screen";
+						$.messager.confirm("提示","密码重置成功！前确定去登陆",function(){
+							window.location.href="/login.jsp";
 						});
 				}else{
 					$.messager.popup(data.message);
@@ -118,13 +118,13 @@
 	
 	<!-- 网页内容 --> 
 	<div class="container">  
-		<form id="loginForm" class="form-horizontal el-login-form" action="/SendVerifyCode/reset.screen" method="post" >
+		<form id="loginForm" class="form-horizontal el-login-form" action="/Register/resetPassword.screen" method="post" >
 			<p class="h4" style="margin: 10px 10px 20px 110px;color:#999;">${phoneNumber} 找回密码  1.输入手机号 2.输入验证码    <font color="blue">3.设置密码</font></p> 
 			<div class="form-group">
-				<label class="control-label col-sm-2">验证码</label>
+				<label class="control-label col-sm-2">输入新密码</label>
 				<div class="col-sm-10">
-					<input type="text" id="mobile" autocomplete="off" name="mobile" class="form-control"  placeholder="输入验证码"/>
-					<!-- <button id="sendVerifyCode" class="btn btn-success" type="button" autocomplate="off">发送验证码</button> -->
+					<input type="text" id="newPassword" autocomplete="off" name="newPassword" class="form-control"  placeholder="请输入新密码"/>
+					<input type="hidden" id="phoneNumber"  name="phoneNumber" autocomplete="off"" class="form-control"  value="${phoneNumber}"/>
 				</div> 
 			</div>
 			<div class="form-gorup">

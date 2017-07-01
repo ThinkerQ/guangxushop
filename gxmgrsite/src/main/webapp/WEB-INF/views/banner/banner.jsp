@@ -156,12 +156,12 @@
                             $.get("/banner_delete?id=" + rowData.id, function (data) {
                                 if (data.success) {
                                     //响应数据回显
-                                    $.messager.alert("温馨提示", data.msg, "info", function () {
+                                    $.messager.alert("温馨提示", data.message, "info", function () {
                                         //刷新
                                         bannerDatagrid.datagrid("load");
                                     });
                                 } else {
-                                    $.messager.alert("温馨提示", data.msg, "warning");
+                                    $.messager.alert("温馨提示", data.message, "warning");
                                 }
                             })
                         }
@@ -193,14 +193,14 @@
                         //JOSN字符串转对象
                         data = $.parseJSON(data);
                         if (data.success) {
-                            $.messager.alert("温馨提示", data.msg, "info", function () {
+                            $.messager.alert("温馨提示", data.message, "info", function () {
                                 //关闭窗口
                                 bannerDialog.dialog("close");
                                 //刷新
                                 bannerDatagrid.datagrid("load");
                             })
                         } else {
-                            $.messager.alert("温馨提示", data.msg, "warning");
+                            $.messager.alert("温馨提示", data.message, "warning");
                         }
                     }
                 });

@@ -72,5 +72,11 @@
     select id,username
     from logininfo where username LIKE concat(#{word},'%') AND usertype = #{userType}
   </select>
+  
+  <update id="resetPassword">
+  	update logininfo 
+  	set password = #{newPassword} 
+  	where mobile = #{phoneNumber}
+  </update>
 
 </mapper>

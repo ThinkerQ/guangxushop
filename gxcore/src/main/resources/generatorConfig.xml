@@ -25,7 +25,7 @@
 		</commentGenerator>
 
 		<!-- 必须要有的，使用这个配置链接数据库 @TODO:是否可以扩展 -->
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql:///gxshop" userId="root" password="admin">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql:///gxshop" userId="root" password="GSQ11024a">
 			<!-- 这里面可以设置property属性，每一个property属性都设置到配置的Driver上 -->
 		</jdbcConnection>
 
@@ -71,7 +71,7 @@
 			<!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查 <property name="rootInterface" value=""/> -->
 		</javaClientGenerator>
 
-		<table tableName="systemmenu" domainObjectName="SystemMenu">
+		<table tableName="brand" domainObjectName="Brand">
 			<!-- 参考 javaModelGenerator 的 constructorBased属性 -->
 			<property name="constructorBased" value="false" />
 			<generatedKey column="id" sqlStatement="JDBC" />

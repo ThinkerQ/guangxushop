@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.guangxunet.shop.base.domain.Banner;
 import com.guangxunet.shop.base.service.IBannerService;
+import com.guangxunet.shop.base.util.BidConst;
 import com.guangxunet.shop.base.util.JsonResult;
 import com.guangxunet.shop.base.util.LoggerUtil;
 
@@ -19,6 +20,7 @@ import com.guangxunet.shop.base.util.LoggerUtil;
 * 类说明 广告Banner控制器
 */
 @Controller
+@RequestMapping("Banner")
 public class BannerController {
 	@Autowired
 	private IBannerService iBannerService;
@@ -42,6 +44,11 @@ public class BannerController {
 				bannerList = bannerList.subList(0, bannerLimitNumber);
 			}
 			
+			//补充完成的图片路径
+			for (Banner banner : bannerList) {
+				String image = BidConst.GET_IMAGES_PATH + banner.getImagePath();
+				banner.setImagePath(image);
+			}
 			LoggerUtil.info("==================获取banner列表=====结果===" + bannerList);
 			
 			if (bannerList != null && bannerList.size() > 0) {//集合非空

@@ -117,10 +117,15 @@ public class LogininfoServiceImpl implements ILogininfoService{
         if (count <= 0){
             Logininfo admin = new Logininfo();
             admin.setUsername(BidConst.DEFAULT_ADMIN_NAME);
-            admin.setPassword(BidConst.DEFAULT_ADMIN_PASSWORD);
+            admin.setPassword(MD5.encode(BidConst.DEFAULT_ADMIN_PASSWORD));
             admin.setUserType(Logininfo.USER_MANAGER);
             admin.setState(Logininfo.STATE_NOMAL);
             this.logininfoMapper.insert(admin);
         }
     }
+
+	@Override
+	public int resetPassword(String phoneNumber, String newPassword) {
+		return logininfoMapper.resetPassword(phoneNumber,MD5.encode(newPassword));
+	}
 }

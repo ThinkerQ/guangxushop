@@ -1,8 +1,11 @@
 package com.guangxunet.shop.base.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.guangxunet.shop.base.domain.SystemMenu;
 import com.guangxunet.shop.base.mapper.SystemMenuMapper;
 import com.guangxunet.shop.base.service.ISystemMenuService;
+import com.guangxunet.shop.base.util.LoggerUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +41,7 @@ public class SystemMenuServiceImpl implements ISystemMenuService {
             }
             systemMenu.setChildren(children);
         }
-
+        LoggerUtil.info("-----systemMenuList-------------"+JSON.toJSONString(systemMenuList));
         return systemMenuList;
     }
 }

@@ -21,5 +21,9 @@ public class BidConst {
      * 短信验证码发送时间间隔60s
      */
     public static final long SEND_VERIFY_INTERVAL = 60;
-    
+
+    /**
+     * 获取图片路径前缀
+     */
+    public static final String GET_IMAGES_PATH = "http:106.15.46.108:8081/";
 }

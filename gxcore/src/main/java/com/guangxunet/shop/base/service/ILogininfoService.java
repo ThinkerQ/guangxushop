@@ -50,4 +50,11 @@ public interface ILogininfoService {
      * @return
      */
     Logininfo supervisorLogin(String username, String password, String ip, int userType);
+
+    /**
+     * 根据手机号修改用户密码
+     * @param phoneNumber
+     * @param newPassword
+     */
+	int resetPassword(String phoneNumber, String newPassword);
 }

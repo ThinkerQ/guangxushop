@@ -11,8 +11,6 @@ import com.guangxunet.shop.base.service.ILogininfoService;
 import com.guangxunet.shop.base.service.IVerifyCodeService;
 import com.guangxunet.shop.base.util.JsonResult;
 import com.guangxunet.shop.base.util.PhoneFormatCheckUtils;
-import com.guangxunet.shop.base.util.UserContext;
-import com.guangxunet.shop.base.vo.VerifyCodeVO;
 
 import shaded.org.apache.commons.lang3.StringUtils;
 
@@ -110,5 +108,47 @@ public class RegisterController {
     	
     	return !logininfoService.checkUserPhoneNumberExist(mobile);
     }
+    
+    /**
+     * 重置密码
+     * @param phoneNumber
+     * @param newPassword
+     */
+    @RequestMapping("/resetPassword.screen")
+    @ResponseBody
+    public JsonResult resetPassword(String phoneNumber,String newPassword){
+    	JsonResult result = null;
+        try {
+        	//验证手机号
+			if (StringUtils.isEmpty(phoneNumber)) {
+				throw new RuntimeException("手机号为空！");
+			}
+			
+			if (StringUtils.isEmpty(newPassword)) {
+				throw new RuntimeException("请输入新密码！");
+			}
+			
+        	//手机号是否为已注册用户
+        	boolean numberExist = logininfoService.checkUserPhoneNumberExist(phoneNumber);
+        	if (!numberExist) {
+        		throw new RuntimeException("非注册用户！");
+    		}
+        	
+        	if (StringUtils.isEmpty(newPassword)) {
+        		throw new RuntimeException("请填写新密码！");
+			}
+        	
+        	//修改用户密码
+        	logininfoService.resetPassword(phoneNumber,newPassword);
+        	
+			result = new JsonResult(true,"密码重置成功！");
+        } catch (Exception e) {
+            result  = new JsonResult(e.getMessage());
+            e.printStackTrace();
+        }
+    	
+    	return result;
+    }
+    
 
 }

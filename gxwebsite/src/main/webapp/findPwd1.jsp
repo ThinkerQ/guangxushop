@@ -50,9 +50,10 @@
 			success:function(data){
 				if(data.success){
 					if (data.result.isExist) {
-						$.messager.confirm("提示","验证通过，点击进入下一步",function(){
+						/* $.messager.confirm("提示","验证通过，点击进入下一步",function(){
 							window.location.href="/Login/findPwd2.screen?"+"phoneNumber=18211674995";
-						});
+						}); */
+							window.location.href="/Login/findPwd2.screen?"+"phoneNumber=18211674995";
 					}else{
 						$.messager.popup("非注册用户！");
 					}

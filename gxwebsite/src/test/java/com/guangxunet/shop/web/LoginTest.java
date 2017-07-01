@@ -1,5 +1,7 @@
 package com.guangxunet.shop.web;
 
+import static org.junit.Assert.*;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
@@ -22,6 +24,17 @@ import com.guangxunet.shop.base.util.LoggerUtil;
 public class LoginTest {
 	@Autowired
 	private ILogininfoService iLogininfoService;
+	
+	/**
+	 * 修改密码
+	 * @throws Exception
+	 */
+	@Test
+	public void testReset() throws Exception {
+		String phoneNumber = "18211674995";
+		String newPassword = "admin1";
+//		iLogininfoService.resetPassword(phoneNumber,newPassword);
+	}
 	
 	/**
 	 * 前台新用户注册

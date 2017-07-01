@@ -135,7 +135,7 @@
 			</div>
 			<div class="right">
 				<a target="_blank" href="http://weibo.com/ITxiaomage"><img
-					src="/images/sina.png"></a>
+					src="http://www.gengshuqiang.com:8081/1.jpg"></a>
 			</div>
 			<div class="clearfix"></div>
 		</div>
