@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class QueryObject {
-    protected Integer page;//页数
-    protected Integer rows;//条数
+    protected Integer page=1;//页数
+    protected Integer rows=10;//条数
     //起始数
     public Integer getStart() {
         return (this.page - 1) * this.rows;

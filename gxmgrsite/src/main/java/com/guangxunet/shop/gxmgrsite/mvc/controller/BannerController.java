@@ -91,9 +91,11 @@ public class BannerController extends SupervisorController{
         JsonResult jsonResult = new JsonResult();
         if(!StringUtils.hasLength(banner.getImagePath())){
             jsonResult.setMessage("请上传图片!");
+            return jsonResult;
         }
         if(!StringUtils.hasLength(banner.getType())){
             jsonResult.setMessage("请添加类型!");
+            return jsonResult;
         }
         int count = bannerService.updateByPrimaryKey(banner);
         if(count>0){
@@ -101,6 +103,24 @@ public class BannerController extends SupervisorController{
             jsonResult.setMessage("保存成功!");
         }else {
             jsonResult.setMessage("保存失败!");
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 广告修改
+     * @return
+     */
+    @RequestMapping("/bannerDelete")
+    @ResponseBody
+    public JsonResult bannerDelete(int id){
+        JsonResult jsonResult = new JsonResult();
+        int count = bannerService.deleteByPrimaryKey(id);
+        if(count>0){
+            jsonResult.setSuccess(true);
+            jsonResult.setMessage("删除成功!");
+        }else {
+            jsonResult.setMessage("删除失败!");
         }
         return jsonResult;
     }
