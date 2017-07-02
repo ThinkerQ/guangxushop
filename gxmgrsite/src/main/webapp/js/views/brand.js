@@ -18,23 +18,14 @@ $(function () {
             rownumbers: true,
             singleSelect: true,
             fitColumns: true,
+            loadMsg:'数据加载中......',
             columns: [[
                 {title: "编号", field: "id", width: 1, align: "center"},
                 {title: "品牌名称", field: "name", width: 1, align: "center"},
                 {title: "品牌编码", field: "sn", width: 1, align: "center"}
             ]],
             toolbar: "#brand_datagrid_btn",
-            pageList: [ 10, 20],
-            onClickRow: function (rowIndex, rowData) {
-                //点击到离职人员数据让按钮变灰
-                if (rowData.state) {
-                    brandDatagridBtnA.eq(1).linkbutton('enable');
-                    brandDatagridBtnA.eq(2).linkbutton('enable');
-                } else {
-                    brandDatagridBtnA.eq(1).linkbutton('disable');
-                    brandDatagridBtnA.eq(2).linkbutton('disable');
-                }
-            }
+            pageList: [ 10, 20]
         });
         
         //对话框
@@ -71,7 +62,7 @@ $(function () {
                     brandDialogForm.form("load", rowData);
                     //角色数据回显,需要发送请求获取
                     var html = $.ajax({
-                        url:"/role_queryRoleByEid?eid="+rowData.id,//请求
+                        url:"/Brand/brandUpdate.do?id="+rowData.id,//请求
                         async:false//不是异步请求
                     }).responseText;//获取响应的文本数据
                     html = $.parseJSON(html);//文本转换JSON格式
@@ -81,7 +72,7 @@ $(function () {
                     $.messager.alert("温馨提示", "选择需要的编辑的数据", "warning");
                 }
             },
-            //离职
+            //删除
             remove: function () {
                 //是否选择数据
                 var rowData = brandDatagrid.datagrid("getSelected");
@@ -90,7 +81,7 @@ $(function () {
                     $.messager.confirm("温馨提示", "你确定要离职该员工吗?", function (yes) {
                         if (yes) {
                             //发送请求删除数据
-                            $.get("/brand_delete?id=" + rowData.id, function (data) {
+                            $.get("/Brand/brandDelete.do?id=" + rowData.id, function (data) {
                                 if (data.success) {
                                     //响应数据回显
                                     $.messager.alert("温馨提示", data.message, "info", function () {
@@ -144,7 +135,8 @@ $(function () {
             },
             //取消
             cancel: function () {
-
+            	//关闭窗口
+                brandDialog.dialog("close");
             },
             //查询
             searchContent: function () {

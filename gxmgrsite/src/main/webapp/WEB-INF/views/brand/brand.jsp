@@ -5,7 +5,7 @@
 <head>
     <title>品牌管理页面</title>
     <%@include file="../common/common.jsp" %>
-    <script type="text/javascript" src="/../js/views/brand.js"></script>
+    <script type="text/javascript" src="/../js/views/brand.js" charset ="utf-8"></script>
 </head>
 <body>
 <table id="brand_datagrid"></table>
