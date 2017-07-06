@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Setter@Getter
-public class Banner {
-    private Integer id;
+public class Banner extends BaseDomain{
 
     private String imagePath;
 

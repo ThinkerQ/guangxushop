@@ -1,0 +1,27 @@
+package com.guangxunet.shop.business.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.guangxunet.shop.business.domain.Category;
+
+/** 
+* @author 作者 E-mail: King
+* @version 创建时间：2017年7月4日 下午10:11:39 
+* 类说明 
+*/
+public interface ICategoryService {
+
+	/**
+	 * 一级商品类目列表
+	 */
+	List<Category> categoryOneListAll();
+
+	/**
+	 * 根据父级id查询二级类目
+	 * @param id
+	 * @return
+	 */
+	List<Map<String,Object>> selectByParentId(String id);
+	
+}
