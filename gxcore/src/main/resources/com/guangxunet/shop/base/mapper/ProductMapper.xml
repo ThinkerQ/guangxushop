@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guangxunet.shop.base.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.guangxunet.shop.base.domain.Product" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="categoryId" property="categoryId" jdbcType="BIGINT" />
+    <result column="firstName" property="firstName" jdbcType="VARCHAR" />
+    <result column="secondName" property="secondName" jdbcType="VARCHAR" />
+    <result column="littlePath" property="littlePath" jdbcType="VARCHAR" />
+    <result column="bigPath" property="bigPath" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.guangxunet.shop.base.domain.Product" useGeneratedKeys="true" keyProperty="id" >
+    insert into product (categoryId, firstName, secondName, 
+      littlePath, bigPath, time, 
+      status)
+    values (#{categoryId,jdbcType=BIGINT}, #{firstName,jdbcType=VARCHAR}, #{secondName,jdbcType=VARCHAR}, 
+      #{littlePath,jdbcType=VARCHAR}, #{bigPath,jdbcType=VARCHAR}, #{time,jdbcType=DATE}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.guangxunet.shop.base.domain.Product" >
+    update product
+    set categoryId = #{categoryId,jdbcType=BIGINT},
+      firstName = #{firstName,jdbcType=VARCHAR},
+      secondName = #{secondName,jdbcType=VARCHAR},
+      littlePath = #{littlePath,jdbcType=VARCHAR},
+      bigPath = #{bigPath,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, categoryId, firstName, secondName, littlePath, bigPath, time, status
+    from product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, categoryId, firstName, secondName, littlePath, bigPath, time, status
+    from product
+  </select>
+</mapper>

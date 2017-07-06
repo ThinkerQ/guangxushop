@@ -145,7 +145,7 @@
                     $.messager.confirm("温馨提示", "你确定要删除吗?", function (yes) {
                         if (yes) {
                             //发送请求删除数据
-                            $.get("/bannerDelete?id=" + rowData.id, function (data) {
+                            $.get("/supervisor/banner/bannerDelete?id=" + rowData.id, function (data) {
                                 if (data.success) {
                                     //响应数据回显
                                     $.messager.alert("温馨提示", data.message, "info", function () {
