@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.guangxunet.shop.base.mapper.ProductDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.guangxunet.shop.base.domain.ProductDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="productId" property="productId" jdbcType="BIGINT" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from productdetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.guangxunet.shop.base.domain.ProductDetail" useGeneratedKeys="true" keyProperty="id" >
+    insert into productdetail (productId, path, describe )
+    values (#{productId,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR} )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.guangxunet.shop.base.domain.ProductDetail" >
+    update productdetail
+    set productId = #{productId,jdbcType=BIGINT},
+      path = #{path,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, productId, path, describe
+    from productdetail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, productId, path, describe
+    from productdetail
+  </select>
+</mapper>
