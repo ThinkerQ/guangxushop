@@ -14,7 +14,7 @@ import com.guangxunet.shop.base.service.IBannerService;
 
 /** 
 * @author 作者 E-mail: King
-* @version 创建时间：2017年6月12日 上午12:00:40 
+* @version 创建时间：2017年6月12日 上午12:00:40
 * 类说明 首页Banner相关服务
 */
 @Service("iBannerService")

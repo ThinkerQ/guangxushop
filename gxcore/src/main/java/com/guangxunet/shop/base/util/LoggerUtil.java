@@ -10,7 +10,7 @@ import org.apache.log4j.PropertyConfigurator;
 /** 
 * @author 作者 E-mail: King
 * @version 创建时间：2017年6月12日 下午10:28:50 
-* 类说明 基于log4j的日志工具类 
+* 类说明 基于log4j的日志工具类  
 */
 public class LoggerUtil {
 	public static Logger log = Logger.getLogger(LoggerUtil.class);

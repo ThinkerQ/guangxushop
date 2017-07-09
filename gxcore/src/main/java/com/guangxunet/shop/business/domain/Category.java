@@ -12,11 +12,11 @@ import com.guangxunet.shop.base.domain.BaseDomain;
  * @author King
  * @date 2017年7月3日
  */
-public class Category extends BaseDomain{
+public class Category extends BaseDomain{ 
 
     private String name;//分类名称
 
-    private String parentid;//父级分类
+    private String parentId;//父级分类
     
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -42,15 +42,17 @@ public class Category extends BaseDomain{
         this.name = name == null ? null : name.trim();
     }
 
-    public String getParentid() {
-        return parentid;
-    }
+    
 
-    public void setParentid(String parentid) {
-        this.parentid = parentid == null ? null : parentid.trim();
-    }
+    public String getParentId() {
+		return parentId;
+	}
 
-    public Date getCreateDate() {
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public Date getCreateDate() {
         return createDate;
     }
 

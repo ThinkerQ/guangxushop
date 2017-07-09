@@ -8,7 +8,7 @@ import java.util.List;
 
 /** 
 * @author 作者 E-mail: King
-* @version 创建时间：2017年6月11日 下午11:57:58 
+* @version 创建时间：2017年6月11日 下午11:57:58
 * 类说明 首页Banner
 */
 public interface IBannerService {

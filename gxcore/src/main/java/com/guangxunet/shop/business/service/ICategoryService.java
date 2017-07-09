@@ -11,6 +11,12 @@ import com.guangxunet.shop.business.domain.Category;
 * 类说明 
 */
 public interface ICategoryService {
+	/**
+	 * 删除商品类目
+	 * @param id
+	 * @return
+	 */
+	int deleteByPrimaryKey(Long id);
 
 	/**
 	 * 一级商品类目列表
@@ -23,5 +29,20 @@ public interface ICategoryService {
 	 * @return
 	 */
 	List<Map<String,Object>> selectByParentId(String id);
+	
+	/**
+	 * 新增商品子级类目
+	 * @param id
+	 * @return
+	 */
+	int insertCateGorysItem(Map<String,Object> itemParams);
+
+	/**
+	 * 根据类目Id更新类目信息
+	 * @param params
+	 * @return
+	 */
+	int updateByPrimaryKey(Map<String, Object> params);
+
 	
 }

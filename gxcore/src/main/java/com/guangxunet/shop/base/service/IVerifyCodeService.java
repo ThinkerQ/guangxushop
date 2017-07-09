@@ -4,7 +4,7 @@ package com.guangxunet.shop.base.service;
 /**
  * 短信验证码相关服务
  * @author King
- *创建时间：2017年6月8日 下午23:50:05 
+ *创建时间：2017年6月8日 下午23:50:05  
  */
 public interface IVerifyCodeService {
 

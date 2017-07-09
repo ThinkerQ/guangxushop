@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.guangxunet.shop.base.domain.Logininfo;
 import com.guangxunet.shop.base.domain.Systemlog;
 import com.guangxunet.shop.base.service.ISystemLogService;
@@ -15,7 +14,7 @@ import com.guangxunet.shop.base.util.LoggerUtil;
 import com.guangxunet.shop.base.util.UserContext;
 
 /**日志工具类
- * Created by Administrator on 2016/9/16.
+ * Created by Administrator on 2016/9/16. 
  */
 public class LogUtil {
     @Autowired

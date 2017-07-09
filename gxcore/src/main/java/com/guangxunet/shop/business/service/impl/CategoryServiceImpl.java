@@ -1,5 +1,6 @@
 package com.guangxunet.shop.business.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,24 @@ public class CategoryServiceImpl implements ICategoryService {
 	public List<Map<String,Object>> selectByParentId(String id) {
 		return categoryMapper.selectByParentId(id);
 	}
-	
+
+	@Override
+	public int insertCateGorysItem(Map<String, Object> itemParams) {
+		itemParams.put("createDate", new Date());
+		itemParams.put("updateDate", new Date());
+		return categoryMapper.insertCateGorysItem(itemParams);
+	}
+
+	@Override
+	public int updateByPrimaryKey(Map<String, Object> params) {
+		params.put("updateDate", new Date());
+		return categoryMapper.updateByPrimaryKey(params);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Long id) {
+		return categoryMapper.deleteByPrimaryKey(id);
+	}
+
 	
 }

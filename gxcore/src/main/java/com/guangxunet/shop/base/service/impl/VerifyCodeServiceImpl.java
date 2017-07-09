@@ -32,7 +32,7 @@ import com.guangxunet.shop.base.util.UserContext;
 import com.guangxunet.shop.base.vo.VerifyCodeVO;
 
 /**验证码服务实现类
- * Created by King on 2016/10/11.
+ * Created by King on 2016/10/11.  
  */
 @Service
 public class VerifyCodeServiceImpl implements IVerifyCodeService {

@@ -1,8 +1,10 @@
 package com.guangxunet.shop.business.mapper;
 
-import com.guangxunet.shop.business.domain.Category;
 import java.util.List;
 import java.util.Map;
+
+import com.guangxunet.shop.business.domain.Category;
+
 
 public interface CategoryMapper {
     int deleteByPrimaryKey(Long id);
@@ -19,12 +21,25 @@ public interface CategoryMapper {
      */
     List<Category> selectOneAll();
 
-    int updateByPrimaryKey(Category record);
+    /**
+	 * 根据类目Id更新类目信息
+	 * @param params
+	 * @return
+	 */
+    int updateByPrimaryKey(Map<String, Object> params);
 
     /**
 	 * 根据父级id查询二级类目
 	 * @param pid
 	 * @return
 	 */
-	List<Map<String,Object>> selectByParentId(String pid);
+	List<Map<String,Object>> selectByParentId(String pid); 
+
+	/**
+	 * 新增商品子级类目
+	 * @param id
+	 * @return
+	 */
+	int insertCateGorysItem(Map<String,Object> itemParams);
+
 }

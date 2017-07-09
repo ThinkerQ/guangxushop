@@ -3,7 +3,7 @@ package com.guangxunet.shop.base.domain;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
-@Alias("SystemLog")
+@Alias("SystemLog") 
 public class Systemlog {
     private Long id;
 

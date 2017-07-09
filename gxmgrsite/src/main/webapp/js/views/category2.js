@@ -53,7 +53,6 @@ function cancle(){
 function add(){
 	var data = $("#categorys_datagrid").datagrid("getSelected");
 	$("#parentName").text(data.name);
-	console.log($("input[name='parent']"));
 	$("#categorysItem_dialog").dialog("open");
 	$("#categorysItem_dialog").dialog("setTitle","新增");
 	$("#categorysItem_form").form("clear");
@@ -76,13 +75,13 @@ function del(){
 	if(rowdata){
 	$.messager.confirm("温馨提示'","您确定需要禁用该条字典明细",function(r){
 			if(r){
-				  $.get("/categorysItem_delete?id="+rowdata.id,function(data){
+				  $.get("/Category/categorysItemDelete.do?id="+rowdata.id,function(data){
 			        	if(data.success){
-			        		$.messager.alert("温馨提示",data.msg,"info",function(){
+			        		$.messager.alert("温馨提示",data.message,"info",function(){
 			        			$("#categorysItem_datagrid").datagrid("reload");
 			        		});
 			        	}else{
-			        		$.messager.alert("温馨提示",data.msg,"error");
+			        		$.messager.alert("温馨提示",data.message,"error");
 			        	}
 			        	
 			        },"json")	;	
@@ -98,34 +97,34 @@ function reload(){
 }
 function save(){
 	var url;
-	var id = $("input[name='id']").val();
+	var id = $("input[name='id']").val();//父级类目编号
 	if(id){
-		url="/categorysItem_update";
+		url="/Category/categorysItemUpdate.do";
 	}else{
-		url="/categorysItem_save";
+		url="/Category/categorysItemSave.do"; 
 	}
-	
-$("#categorysItem_form").form("submit",{
-		url:url,
-		onSubmit:function(param){
-			var row = $("#categorys_datagrid").datagrid("getSelected");
-			param["parent.id"]=row.id;
-		},
-      success:function(data){
-	    data=$.parseJSON(data);
-	   if(data.success){
-		 $.messager.alert("温馨提示",data.msg,"info",function(){
-			 var row = $("#categorys_datagrid").datagrid("getSelected");
-			$("#categorysItem_dialog").dialog("close");
-			$("#categorysItem_datagrid").datagrid({
-				url:"/categorysItem_selectItemById?id=" +row.id
+	//提交表单
+	$("#categorysItem_form").form("submit",{
+			url:url,
+			onSubmit:function(param){
+				var row = $("#categorys_datagrid").datagrid("getSelected");
+				param["parentId"]=row.id;
+			},
+	      success:function(data){
+		    data=$.parseJSON(data);
+		   if(data.success){
+			 $.messager.alert("温馨提示",data.message,"info",function(){
+				 var row = $("#categorys_datagrid").datagrid("getSelected");
+				$("#categorysItem_dialog").dialog("close");
+				$("#categorysItem_datagrid").datagrid({
+					url:"/Category/categoryTwoListSelectItemById.do?pid=" +row.id
+				});
 			});
-		});
-	}else{
-		$.messager.alert("温馨提示",data.msg,"error");
+		}else{
+			$.messager.alert("温馨提示",data.message,"error");
+		}
 	}
-}
-	});
+		});
 }
 
 function deptFormatter(value,record,index){

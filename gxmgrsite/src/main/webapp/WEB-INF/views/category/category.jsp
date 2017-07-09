@@ -11,11 +11,11 @@
 </head>
 <body>
 <div id="cc" class="easyui-layout" style="width:600px;height:400px;" fit="true">
-    <div data-options="region:'center' " title="一级商品类目" style="padding:5px;width:100px;">
-        <table id="categorysItem_datagrid"></table>
-    </div>
-    <div data-options="region:'west', split:true" title="二级商品类目" style="width:500px;">
+    <div data-options="region:'west', split:true" title="一级商品类目" style="width:500px;">
         <table id="categorys_datagrid"></table>
+    </div>
+    <div data-options="region:'center' " title="二级商品类目" style="padding:5px;width:100px;">
+        <table id="categorysItem_datagrid"></table>
     </div>
 </div>
 
@@ -43,7 +43,7 @@
     </div>
 </div>
 <div id="bb">
-    <a class="easyui-linkbutton" iconCls="icon-save" onclick="save()">保存</a>
+    <a class="easyui-linkbutton" iconCls="icon-save" onclick="save()">保存2</a>
     <a class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancle()">取消</a>
 </div>
 </body>

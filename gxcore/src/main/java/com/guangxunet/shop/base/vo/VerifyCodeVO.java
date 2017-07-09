@@ -8,7 +8,7 @@ import lombok.ToString;
 import java.util.Date;
 
 /**验证码VO对象
- * Created by King on 2016/10/11.
+ * Created by King on 2016/10/11. 
  */
 @Setter
 @Getter

@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * Created by chenmy 2017-06-20
+ * Created by chenmy 2017-06-20 
  */
 @Setter@Getter
 public class BannerQueryObject extends QueryObject {

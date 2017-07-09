@@ -9,5 +9,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BaseDomain {
-    public Long id;
+    public Long id; 
 }

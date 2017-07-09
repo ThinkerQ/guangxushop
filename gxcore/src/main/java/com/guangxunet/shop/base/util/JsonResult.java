@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class JsonResult {
 	private Boolean success=false;
-    private String message;
+    private String message; 
     private Object result;
     
     public JsonResult(Boolean success, String msg){

@@ -14,7 +14,7 @@ import com.guangxunet.shop.base.vo.VerifyCodeVO;
 * @version 创建时间：2017年6月7日 下午9:25:48 
 * 类说明 用户的上下文
 */
-public class UserContext {
+public class UserContext { 
 	public static final String LOGININFO_IN_SESSION  = "logininfo";
 	public static final String VERIFYCODE_IN_SESSION = "VERIFYCODE_IN_SESSION";
 	
