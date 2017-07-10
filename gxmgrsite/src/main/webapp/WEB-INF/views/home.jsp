@@ -7,10 +7,7 @@
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true" style="width:600px;height:400px;">
-    <div data-options="region:'north'"
-         style="height:100px;background: url('/js/banner-pic.gif'),no-repeat;background-size: cover">
-        <h1>后台管理系统</h1>
-    </div>
+
     <div data-options="region:'west'" style="width:200px;">
         <!--手风琴加菜单-->
         <div class="easyui-accordion" fit="true">
@@ -25,7 +22,7 @@
     <div data-options="region:'center'" style="padding:5px;background:#eee;">
         <!--正文内容-->
         <div id="myTabs" class="easyui-tabs" fit="true">
-            <div title="首页" closable="true">芳芳老师欢迎您</div>
+            <div title="首页" closable="true">后台管理系统</div>
         </div>
     </div>
 </div>

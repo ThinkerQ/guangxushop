@@ -1,5 +1,7 @@
 package com.guangxunet.shop.base.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.guangxunet.shop.business.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,22 +12,22 @@ import java.util.Date;
  * 商品实体表
  */
 @Setter@Getter@ToString
-public class Product {
-    private Long id;//
+public class Product extends BaseDomain{
 
-    private Long categoryId;
+    private String firstName;//主名称
 
-    private String firstName;
+    private String secondName;//副名称
 
-    private String secondName;
+    private String littlePath;//小图路径
 
-    private String littlePath;
+    private String bigPath;//大图路径
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    private Date time;//时间
 
-    private String bigPath;
+    private Integer status;//状态
 
-    private Date time;
+    private Category category;//分类
 
-    private Integer status;
-
+    private Brand brand;//品牌
 
 }

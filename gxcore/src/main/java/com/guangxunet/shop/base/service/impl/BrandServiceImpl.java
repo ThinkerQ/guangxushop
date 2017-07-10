@@ -1,24 +1,21 @@
 package com.guangxunet.shop.base.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.guangxunet.shop.base.domain.Banner;
 import com.guangxunet.shop.base.domain.Brand;
 import com.guangxunet.shop.base.mapper.BrandMapper;
 import com.guangxunet.shop.base.page.PageResult;
-import com.guangxunet.shop.base.query.BannerQueryObject;
 import com.guangxunet.shop.base.query.BrandQueryObject;
 import com.guangxunet.shop.base.service.IBrandService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /** 
 * @author 作者 E-mail: King
 * @version 创建时间：2017年6月30日 下午11:51:06 
 * 类说明 
 */
-@Service("iBrandService")
+@Service("brandService")
 public class BrandServiceImpl implements IBrandService {
 	@Autowired
 	private BrandMapper brandMapper;

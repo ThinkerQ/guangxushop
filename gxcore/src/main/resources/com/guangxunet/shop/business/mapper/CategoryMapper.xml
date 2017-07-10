@@ -13,17 +13,13 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.guangxunet.shop.business.domain.Category" useGeneratedKeys="true" keyProperty="id" >
-    insert into category (name, parent_id, create_date, 
-      update_date)
-    values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP})
+    insert into category (name, parent_id, create_date, update_date)
+    values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},#{updateDate,jdbcType=TIMESTAMP})
   </insert>
   
   <insert id="insertCateGorysItem" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id" >
-    insert into category (name, parent_id, create_date, 
-      update_date)
-    values (#{name}, #{parentId}, #{createDate}, 
-      #{updateDate})
+    insert into category (name, parent_id, create_date, update_date)
+    values (#{name}, #{parentId}, #{createDate},  #{updateDate})
   </insert>
   
   

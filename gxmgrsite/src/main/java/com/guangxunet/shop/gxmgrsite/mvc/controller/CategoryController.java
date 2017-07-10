@@ -4,19 +4,15 @@ import com.guangxunet.shop.base.util.JsonResult;
 import com.guangxunet.shop.base.util.LoggerUtil;
 import com.guangxunet.shop.business.domain.Category;
 import com.guangxunet.shop.business.service.ICategoryService;
-
-import shaded.org.apache.commons.lang3.StringUtils;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import shaded.org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -24,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by King on 2017/7/04.
  */
 @Controller
-@RequestMapping("/Category")
+@RequestMapping("/supervisor/category")
 public class CategoryController extends SupervisorController{
 
     @Autowired
@@ -38,6 +34,7 @@ public class CategoryController extends SupervisorController{
     public String home(){
         return "/category/category";
     }
+
     @RequestMapping("/systemDiction.do")
     public String systemDiction(){
     	return "/systemDictionary/systemDictionary";

@@ -3,29 +3,38 @@
 <mapper namespace="com.guangxunet.shop.base.mapper.ProductMapper" >
   <resultMap id="BaseResultMap" type="com.guangxunet.shop.base.domain.Product" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="categoryId" property="categoryId" jdbcType="BIGINT" />
     <result column="firstName" property="firstName" jdbcType="VARCHAR" />
     <result column="secondName" property="secondName" jdbcType="VARCHAR" />
     <result column="littlePath" property="littlePath" jdbcType="VARCHAR" />
     <result column="bigPath" property="bigPath" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="DATE" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <!-- 商品分类-->
+    <association property="category" javaType="com.guangxunet.shop.business.domain.Category" columnPrefix="category_">
+      <id column="id" property="id"/>
+      <result column="name" property="name"/>
+    </association>
+    <!-- 品牌-->
+    <association property="brand" javaType="com.guangxunet.shop.base.domain.Brand" columnPrefix="brand_">
+      <id column="id" property="id"/>
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from product
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.guangxunet.shop.base.domain.Product" useGeneratedKeys="true" keyProperty="id" >
-    insert into product (categoryId, firstName, secondName, 
-      littlePath, bigPath, time, 
+    insert into product (categoryId,brandId firstName, secondName, littlePath, bigPath, time,
       status)
-    values (#{categoryId,jdbcType=BIGINT}, #{firstName,jdbcType=VARCHAR}, #{secondName,jdbcType=VARCHAR}, 
+    values (#{categoryId,jdbcType=BIGINT},#{brandId,jdbcType=BIGINT}, #{firstName,jdbcType=VARCHAR}, #{secondName,jdbcType=VARCHAR},
       #{littlePath,jdbcType=VARCHAR}, #{bigPath,jdbcType=VARCHAR}, #{time,jdbcType=DATE}, 
       #{status,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.guangxunet.shop.base.domain.Product" >
     update product
     set categoryId = #{categoryId,jdbcType=BIGINT},
+      brandId = #{brandId,jdbcType=BIGINT},
       firstName = #{firstName,jdbcType=VARCHAR},
       secondName = #{secondName,jdbcType=VARCHAR},
       littlePath = #{littlePath,jdbcType=VARCHAR},
@@ -34,13 +43,34 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <sql id="sqlSelect">
+    id, firstName, secondName, littlePath, bigPath, time, status,c.id as category_id, c.name as category_name, b.id as brand_id,b.name as brand_name
+  </sql>
+  <sql id="sqlFrom">
+    product p left join category c on c.id = p.categoryId left join brand b on b.id = p.brandId
+  </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select id, categoryId, firstName, secondName, littlePath, bigPath, time, status
-    from product
-    where id = #{id,jdbcType=BIGINT}
+    select <include refid="sqlSelect"/>
+    from <include refid="sqlFrom"/>
+    where p.id = #{id,jdbcType=BIGINT}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, categoryId, firstName, secondName, littlePath, bigPath, time, status
     from product
+  </select>
+
+  <select id="selectByCount" resultType="long">
+    select count(1) from product
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select  <include refid="sqlSelect"/>
+    from <include refid="sqlFrom"/>
+    <if test="page!=null">
+      limit #{start},#{rows}
+    </if>
   </select>
 </mapper>

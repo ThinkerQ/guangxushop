@@ -13,24 +13,24 @@ import java.util.Date;
 public class Period {
     private Long id;
 
-    private Long periodNumber;
+    private Long periodNumber;//期数号码
 
-    private Long prizeUserId;
+    private Long prizeUserId;//获得者
 
-    private Integer needCount;
+    private Integer needCount;//需要人次
 
-    private Integer alreadyCount;
+    private Integer alreadyCount;//已投人次
 
-    private Integer surplusCount;
+    private Integer surplusCount;//剩余人次
 
-    private Long numberId;
+    private Long numberId;//中奖号码表ID
 
-    private Long productId;
+    private Long productId;//商品表ID
 
-    private Date createTime;
+    private Date createTime;//创建时间
 
-    private Date prizeTime;
+    private Date prizeTime;//揭晓时间
 
-    private Integer status;
+    private Integer status;//状态:0,正在进行;1,已揭晓
 
 }

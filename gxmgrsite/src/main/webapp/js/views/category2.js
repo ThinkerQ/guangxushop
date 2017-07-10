@@ -4,7 +4,7 @@ $(function(){
 	categorysItem_datagrid = $("#categorysItem_datagrid");
 	
 	categorys_datagrid.datagrid({
-		url:"/Category/categoryOneListAll.do",
+		url:"/supervisor/category/categoryOneListAll.do",
 		fit:true,
 		rownumbers:true,
 		pagination:true,
@@ -20,7 +20,7 @@ $(function(){
 	               ]],
 	               onClickRow:function(rowIndex, rowData){
 	            	   categorysItem_datagrid.datagrid({
-    	            		   url:"/Category/categoryTwoListSelectItemById.do?pid="+rowData.id,
+    	            		   url:"/supervisor/category/categoryTwoListSelectItemById.do?pid="+rowData.id,
     	            			fit:true,
     	            			rownumbers:true,
     	            			pagination:true,
@@ -75,7 +75,7 @@ function del(){
 	if(rowdata){
 	$.messager.confirm("温馨提示'","您确定需要禁用该条字典明细",function(r){
 			if(r){
-				  $.get("/Category/categorysItemDelete.do?id="+rowdata.id,function(data){
+				  $.get("/supervisor/category/categorysItemDelete.do?id="+rowdata.id,function(data){
 			        	if(data.success){
 			        		$.messager.alert("温馨提示",data.message,"info",function(){
 			        			$("#categorysItem_datagrid").datagrid("reload");
@@ -99,9 +99,9 @@ function save(){
 	var url;
 	var id = $("input[name='id']").val();//父级类目编号
 	if(id){
-		url="/Category/categorysItemUpdate.do";
+		url="/supervisor/category/categorysItemUpdate.do";
 	}else{
-		url="/Category/categorysItemSave.do"; 
+		url="/supervisor/category/categorysItemSave.do";
 	}
 	//提交表单
 	$("#categorysItem_form").form("submit",{
@@ -117,7 +117,7 @@ function save(){
 				 var row = $("#categorys_datagrid").datagrid("getSelected");
 				$("#categorysItem_dialog").dialog("close");
 				$("#categorysItem_datagrid").datagrid({
-					url:"/Category/categoryTwoListSelectItemById.do?pid=" +row.id
+					url:"/supervisor/category/categoryTwoListSelectItemById.do?pid=" +row.id
 				});
 			});
 		}else{

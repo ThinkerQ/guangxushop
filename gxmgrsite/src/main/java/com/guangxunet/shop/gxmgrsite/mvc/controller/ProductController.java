@@ -1,66 +1,64 @@
 package com.guangxunet.shop.gxmgrsite.mvc.controller;
 
-import com.guangxunet.shop.base.domain.Brand;
+import com.guangxunet.shop.base.domain.Product;
 import com.guangxunet.shop.base.page.PageResult;
-import com.guangxunet.shop.base.query.BrandQueryObject;
-import com.guangxunet.shop.base.service.IBrandService;
+import com.guangxunet.shop.base.query.ProductQueryObject;
+import com.guangxunet.shop.base.service.IProductService;
 import com.guangxunet.shop.base.util.JsonResult;
-import com.guangxunet.shop.base.util.LoggerUtil;
-import com.guangxunet.shop.base.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /** 
-* @author 作者 E-mail: King
-* @version 创建时间：2017年6月30日 下午11:31:56 
-* 类说明 品牌管理
+* @author 作者 Chenmy
+* @version 创建时间：2017年7月7日
+* 类说明 商品管理
 */
 @Controller
-@RequestMapping("/supervisor/brand")
-public class BrandController extends SupervisorController{
+@RequestMapping("/supervisor/product")
+public class ProductController extends SupervisorController{
 	@Autowired
-	private IBrandService iBrandService; 
+	private IProductService iProductService; 
 	
 	/**
-	 * 返回片品牌页面
+	 * 返回片商品页面
 	 * @return
 	 */
-	@RequestMapping("/brand.do")
+	@RequestMapping("/product.do")
     public String home(){
-        return "/brand/brand";
+        return "/product/product";
     }
 	
 	/**
-	 * 品牌列表
+	 * 商品列表
 	 * @param qo
 	 * @return
 	 */
-	@RequestMapping("/brandList.do")
+	@RequestMapping("/productList.do")
 	@ResponseBody
-	public PageResult brandList(BrandQueryObject qo){
-        PageResult result = iBrandService.selectByCondition(qo);
+	public PageResult productList(ProductQueryObject qo){
+        PageResult result = iProductService.selectByCondition(qo);
         return result;
     }
 	
 	/**
-	 * 更新品牌
-	 * @param brand
+	 * 更新商品
+	 * @param product
 	 */
-	@RequestMapping("/brandUpdate.do")
+	@RequestMapping("/productUpdate.do")
 	@ResponseBody
-	public JsonResult brandUpdate(Brand brand){
-		try {
-			String name =  StringUtils.getReCharSet(brand.getName());
-			brand.setName(name);
+	public JsonResult productUpdate(Product product){
+		/*try {
+			String name =  StringUtils.getReCharSet(product.getName());
+			product.setName(name);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
-		LoggerUtil.info("----------Brand----------"+brand.getName());
-		
+		LoggerUtil.info("----------Product----------"+product.getName());
+		*/
 		JsonResult jsonResult = null;
-		int count = iBrandService.updateByPrimaryKey(brand);
+		int count = iProductService.updateByPrimaryKey(product);
 		
 		if (count > 0) {
 			jsonResult = new JsonResult(true,"保存成功！");
@@ -71,13 +69,13 @@ public class BrandController extends SupervisorController{
 		return jsonResult;
 	}
 	
-	@RequestMapping("/brandSave.do")
+	@RequestMapping("/productSave.do")
 	@ResponseBody
-	public JsonResult brandSave(Brand brand){
+	public JsonResult productSave(Product product){
 		JsonResult jsonResult = null;
-		String name =  StringUtils.getReCharSet(brand.getName());
-		brand.setName(name);
-		int count = iBrandService.insert(brand);
+		/*String name =  StringUtils.getReCharSet(product.getName());
+		product.setName(name);*/
+		int count = iProductService.insert(product);
 		
 		if (count > 0) {
 			jsonResult = new JsonResult(true,"保存成功！");
@@ -89,16 +87,16 @@ public class BrandController extends SupervisorController{
 	}
 	
 	/**
-	 *删除品牌
-	 * @param brand
+	 *删除商品
+	 * @param product
 	 * @return
 	 */
-	@RequestMapping("/brandDelete.do")
+	@RequestMapping("/productDelete.do")
 	@ResponseBody
-	public JsonResult brandDelete(Brand brand){
+	public JsonResult productDelete(Product product){
 		JsonResult jsonResult = null;
 		try {
-			int count = iBrandService.deleteByPrimaryKey(brand.getId());
+			int count = iProductService.deleteByPrimaryKey(product.getId());
 			if (count > 0) {
 				jsonResult = new JsonResult(true, "删除成功！");
 			} else {
